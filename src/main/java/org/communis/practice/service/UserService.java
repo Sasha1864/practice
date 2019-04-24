@@ -8,6 +8,7 @@ import org.communis.practice.exception.error.ErrorCodeConstants;
 import org.communis.practice.exception.error.ErrorInformationBuilder;
 import org.communis.practice.repository.UserRepository;
 import org.communis.practice.repository.specifications.UserSpecification;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ import java.util.List;
 @Service
 public class UserService{
     private UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User getById(Long id) {
         return userRepository.findById(id);

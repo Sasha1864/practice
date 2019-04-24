@@ -28,5 +28,5 @@ spring:
 liquibase:
   change-log: classpath:/migration/changelog.xml
 
-JavaWebIntro:
+practice:
   timezone: Europe/Moscow

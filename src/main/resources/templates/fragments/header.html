@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<header th:fragment="header(item, user)">
+    <nav class="nav-extended">
+        <div class="nav-wrapper">
+            <a class="brand-logo center" th:href="@{/}">Java Web Intro</a>
+            <ul id="nav-mobile" class="left">
+                <li><a href="#" data-activates="slide-out" id="collapse-btn"><i class="material-icons">menu</i></a>
+                </li>
+            </ul>
+        </div>
+        <ul id="slide-out" class="side-nav">
+            <li>
+                <div class="userView"
+                     th:with="isAnonymous=${#authorization.expression('hasRole(''ROLE_ANONYMOUS'')')}">
+                    <a th:class="${isAnonymous ? 'not-clickable' : 'underline-link'}"
+                       th:href="@{${isAnonymous ? '#' : '/my'}}">
+                            <span class="white-text name" th:text="${#authorization.expression('!hasRole(''ROLE_ANONYMOUS'')') ?
+                    #authentication.getPrincipal().getUser().getFio() : 'Анонимный пользователь'}"></span></a>
+                    <span sec:authorize="!hasRole('ROLE_ANONYMOUS')" class="white-text email not-clickable"
+                          th:text="${#authentication.getPrincipal().getUser().getMail()}">
+                        </span>
+                    <a class="underline-link" th:href="@{/login}"
+                       sec:authorize="hasRole('ROLE_ANONYMOUS')">Войти</a>
+                </div>
+            </li>
+            <li th:class="${item == 'test1'} ? 'active' : ''" sec:authorize="hasRole('ROLE_ANONYMOUS')">
+                <a th:href="@{/test1}">Test 1</a>
+            </li>
+            <li th:class="${item == 'test2'} ? active : ''" sec:authorize="hasRole('ROLE_ANONYMOUS')">
+                <a th:href="@{/test2}">Test 2</a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="divider"></div>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')"
+                th:class="${item == 'users'} ? active : ''"><a th:href="@{/admin/users}">Пользователи</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')"
+                th:class="${item == 'ldap'} ? active : ''"><a th:href="@{/admin/ldap}">LDAP</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="divider"></div>
+            </li>
+            <li sec:authorize="!hasRole('ROLE_ANONYMOUS')">
+                <div class="divider"></div>
+            </li>
+            <li sec:authorize="!hasRole('ROLE_ANONYMOUS')">
+                <a th:href="@{/logout}">Выход</a>
+            </li>
+        </ul>
+        <div class="nav-content row">
+            <ul class="tabs tabs-transparent">
+                <li class="tab">
+                    <a th:class="${item == 'test1'} ? 'active' : ''" target="_self"
+                            th:href="@{/test1}">
+                        Test 1</a>
+                </li>
+                <li class="tab">
+                    <a th:class="${item == 'test2'} ? 'active' : ''" target="_self"
+                            th:href="@{/test2}">
+                        Test 2</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</header>

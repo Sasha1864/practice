@@ -1,6 +1,8 @@
 package org.communis.practice.controller.view;
 
 import lombok.extern.log4j.Log4j2;
+import org.communis.practice.entity.Message;
+import org.communis.practice.repository.UserRepository;
 import org.communis.practice.service.MessageService;
 import org.communis.practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,12 @@ public class MessageController {
     private final MessageService messageService;
 
     @Autowired
-    public MessageController(MessageService messageService) {
+    private final UserService userService;
+
+    @Autowired
+    public MessageController(MessageService messageService, UserService userService) {
         this.messageService = messageService;
+        this.userService = userService;
     }
 
     /*@RequestMapping(value = "")
@@ -30,6 +36,9 @@ public class MessageController {
     }*/
     @RequestMapping("/")
     public void test(){
-        System.out.println(messageService.getById((long)1));
+        Message message = messageService.getById((long)1);
+        String sender = userService.getById(message.getId_sender()).getName();
+        String receiver = userService.getById(message.getId_receiver()).getName();
+        System.out.println("User "+ sender +" send to user "+ receiver + " message " + message.getMessage());
     }
 }

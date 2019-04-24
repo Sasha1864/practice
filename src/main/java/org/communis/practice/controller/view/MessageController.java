@@ -1,6 +1,7 @@
 package org.communis.practice.controller.view;
 
 import lombok.extern.log4j.Log4j2;
+import org.communis.practice.service.MessageService;
 import org.communis.practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Log4j2
 @Controller
-@RequestMapping(value = "admin/users")
-public class UserController {
-    private String USER_VIEWS_PATH = "admin/user/";
+@RequestMapping(value = "admin/messages")
+public class MessageController {
+    private String USER_VIEWS_PATH = "admin/message/";
 
     @Autowired
-    private final UserService userService;
+    private final MessageService messageService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public MessageController(MessageService messageService) {
+        this.messageService = messageService;
     }
 
     /*@RequestMapping(value = "")
@@ -29,6 +30,6 @@ public class UserController {
     }*/
     @RequestMapping("/")
     public void test(){
-        System.out.println(userService.getById((long)1));
+        System.out.println(messageService.getById((long)1));
     }
 }

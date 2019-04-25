@@ -17,33 +17,10 @@ public class Question {
     @Column(name = "question")
     private String question;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_country")
     private Country country;
 
-    public  Long getId(){
-        return id;
-    }
-
-    public  String getQuestion(){
-        return question;
-    }
-
-    public void setId(Long id){
-        this.id = id;
-    }
-
-    public void setQuestion(String question){
-        this.question = question;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
 }
 
 

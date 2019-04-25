@@ -37,8 +37,6 @@ public class MessageController {
     @RequestMapping("/")
     public void test(){
         Message message = messageService.getById((long)1);
-        String sender = userService.getById(message.getId_sender()).getName();
-        String receiver = userService.getById(message.getId_receiver()).getName();
-        System.out.println("User "+ sender +" send to user "+ receiver + " message " + message.getMessage());
+        System.out.println(message);
     }
 }

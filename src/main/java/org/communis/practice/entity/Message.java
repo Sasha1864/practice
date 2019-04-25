@@ -14,11 +14,13 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_sender")
-    private Long id_sender;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_sender")
+    private User sender;
 
-    @Column(name = "id_receiver")
-    private Long id_receiver;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_receiver")
+    private User receiver;
 
     @Column(name = "message")
     private String message;
@@ -26,12 +28,14 @@ public class Message {
     public  Long getId(){
         return id;
     }
-    public  Long getIdSender(){
-        return id_sender;
+    public  User getSender(){
+        return sender;
     }
-    public  Long getIdReceiver(){
-        return id_receiver;
+
+    public  User getReceiver(){
+        return receiver;
     }
+
     public  String getMessage(){
         return message;
     }
@@ -40,12 +44,12 @@ public class Message {
         this.id = id;
     }
 
-    public void setIdSender(Long id_sender){
-        this.id_sender = id_sender;
+    public void setSender(User sender){
+        this.sender = sender;
     }
 
-    public void setIdReceiver(Long id_receiver){
-        this.id_receiver = id_receiver;
+    public void setReceiver(User receiver){
+        this.receiver = receiver;
     }
 
     public void setMessage(String message){

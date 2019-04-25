@@ -37,8 +37,8 @@ public class MessageWrapper implements ObjectWrapper<Message>, Serializable
         if(item!=null)
         {
             id = item.getId();
-            id_sender = item.getId_sender();
-            id_receiver = item.getId_receiver();
+            id_sender = item.getSender().getId();
+            id_receiver = item.getReceiver().getId();
             message = item.getMessage();
         }
     }
@@ -46,8 +46,6 @@ public class MessageWrapper implements ObjectWrapper<Message>, Serializable
     @Override
     public void fromWrapper(Message item) {
         if(item!=null) {
-            item.setId_sender(id_sender);
-            item.setId_receiver(id_receiver);
             item.setMessage(message);
         }
     }

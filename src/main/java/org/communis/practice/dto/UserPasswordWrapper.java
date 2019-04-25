@@ -23,11 +23,11 @@ public class UserPasswordWrapper {
 
     }
 
-    public UserPasswordWrapper(UserWrapper userWrapper) {
+    /*public UserPasswordWrapper(UserWrapper userWrapper) {
         id = userWrapper.getId();
         password = userWrapper.getPassword();
         confirmPassword = userWrapper.getConfirmPassword();
-    }
+    }*/
 
     public String getPassword() {
         return password;

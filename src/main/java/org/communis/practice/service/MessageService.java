@@ -2,11 +2,19 @@
 package org.communis.practice.service;
 
 import org.communis.practice.dto.MessageWrapper;
+import org.communis.practice.dto.filters.ObjectFilter;
 import org.communis.practice.entity.Message;
 import org.communis.practice.entity.User;
+import org.communis.practice.exception.ServerException;
+import org.communis.practice.exception.error.ErrorCodeConstants;
+import org.communis.practice.exception.error.ErrorInformationBuilder;
 import org.communis.practice.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -30,11 +38,11 @@ public class MessageService {
         messageRepository.save(message);
     }
 
-    /*public void edit(UserWrapper userWrapper) throws ServerException {
+    public void edit(MessageWrapper messageWrapper) throws ServerException {
         try {
-            User user = getById(userWrapper.getId());
-            userWrapper.fromWrapper(user);
-            userRepository.save(user);
+            Message message = getById(messageWrapper.getId());
+            messageWrapper.fromWrapper(message);
+            messageRepository.save(message);
 
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
@@ -42,16 +50,16 @@ public class MessageService {
     }
 
     public void delete(Long id) {
-        userRepository.delete(id);
+        messageRepository.delete(id);
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<Message> findAll() {
+        return messageRepository.findAll();
     }
 
-    public Page getPageByFilter(Pageable pageable, UserFilterWrapper filterUserWrapper) throws ServerException {
+    /*public Page getPageByFilter(Pageable pageable, ObjectFilter filterUserWrapper) throws ServerException {
         try {
-            return userRepository.findAll(UserSpecification.build(filterUserWrapper), pageable)
+            return messageRepository.findAll(UserSpecification.build(filterUserWrapper), pageable)
                     .map(UserWrapper::new);
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_LIST_ERROR), ex);

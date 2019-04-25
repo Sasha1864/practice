@@ -13,7 +13,6 @@ import java.util.Date;
 @Data
 public class UserWrapper implements ObjectWrapper<User>, Serializable
 {
-    private final String EMAIL_REGEXP = "(.+@.+)";
 
     private Long id;
 
@@ -32,24 +31,10 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
     @Size(max = 20)
     private String login;
 
-    @NotNull
-    @Size(max = 256)
-    private String mail;
-
     @JsonIgnore
     @Size(min = 8, max = 20)
     private String password;
 
-    @JsonIgnore
-    @Size(min = 8, max = 20)
-    private String confirmPassword;
-
-    private Date dateLastOnline;
-    private Date dateOpen;
-    private Date dateClose;
-
-
-    private Long idLdap;
 
     public UserWrapper() {
 
@@ -76,10 +61,11 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
     @Override
     public void fromWrapper(User item) {
         if(item!=null) {
+            item.setId(id);
             item.setLogin(login);
             item.setName(name);
             item.setSurname(surname);
-
+            item.setPassword(password);
         }
     }
 
@@ -87,11 +73,11 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
         return surname + " " + name + (secondName != null ? " " + secondName : "");
     }
 
-    @AssertTrue
+    /*@AssertTrue
     public boolean isPasswordValid() {
         return (password == null && confirmPassword == null) ||
                 (password != null && confirmPassword != null && password.equals(confirmPassword));
-    }
+    }*/
 
 
 

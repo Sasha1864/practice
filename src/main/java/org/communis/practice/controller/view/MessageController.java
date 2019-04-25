@@ -19,12 +19,8 @@ public class MessageController {
     private final MessageService messageService;
 
     @Autowired
-    private final UserService userService;
-
-    @Autowired
-    public MessageController(MessageService messageService, UserService userService) {
+    public MessageController(MessageService messageService) {
         this.messageService = messageService;
-        this.userService = userService;
     }
 
     /*@RequestMapping(value = "")
@@ -39,4 +35,10 @@ public class MessageController {
         Message message = messageService.getById((long)1);
         System.out.println(message);
     }
+
+   /* @RequestMapping("/add")
+    public void test(){
+        Message message = messageService.getById((long)1);
+        System.out.println(message);
+    }*/
 }

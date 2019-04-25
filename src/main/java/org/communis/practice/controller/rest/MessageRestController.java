@@ -23,6 +23,7 @@ import java.util.List;
 @RequestMapping(value = "admin/messages")
 public class MessageRestController {
 
+    @Autowired
     private final MessageService messageService;
 
     @Autowired

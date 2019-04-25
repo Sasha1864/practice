@@ -19,11 +19,21 @@ CREATE TABLE messages
   FOREIGN KEY (id_receiver) REFERENCES users (id)
 );
 
+CREATE TABLE countries
+(
+ id                  BIGINT AUTO_INCREMENT NOT NULL,
+ name                CHARACTER VARYING NOT NULL,
+ image               CHARACTER VARYING NOT NULL,
+ PRIMARY KEY (id)
+);
+
 CREATE TABLE questions
 (
  id                  BIGINT AUTO_INCREMENT NOT NULL,
+ id_country          BIGINT NOT NULL,
  question            CHARACTER VARYING NOT NULL,
  PRIMARY KEY (id),
+ FOREIGN KEY (id_country) REFERENCES countries (id)
 );
 
 CREATE TABLE answers
@@ -36,8 +46,6 @@ CREATE TABLE answers
  FOREIGN KEY (id_question) REFERENCES questions (id)
 );
 
-
-
 CREATE TABLE user_answers
 (
  id                  BIGINT AUTO_INCREMENT NOT NULL,
@@ -47,20 +55,24 @@ CREATE TABLE user_answers
  FOREIGN KEY (id_user) REFERENCES users (id),
  FOREIGN KEY (id_answer) REFERENCES answers (id),
 );
+
+
 INSERT INTO users (login, surname, name,  password)
 VALUES('root','Администратор', 'Администратор',
-       '$2a$10$LijUmixpYL0i9rRvwXrnX.heUijboQzE3PsoCrxuJANIDVX28FNjS'
-       );
+       '$2a$10$LijUmixpYL0i9rRvwXrnX.heUijboQzE3PsoCrxuJANIDVX28FNjS');
+
 INSERT INTO users (login, surname, name,  password)
 VALUES('admin','Андрей', 'Пользователь',
-       '$2a$10$LijUmixpYL0i9rRvwXrnX.heUijboQzE3PsoCrxuJANIDVX28FNjS'
-       );
-INSERT INTO messages (id_sender, id_receiver, message)
-VALUES(1,2, 'Администратор'
-       );
+       '$2a$10$LijUmixpYL0i9rRvwXrnX.heUijboQzE3PsoCrxuJANIDVX28FNjS');
 
-INSERT INTO questions (question)
-VALUES('Перевод слова собака?');
+INSERT INTO messages (id_sender, id_receiver, message)
+VALUES(1,2, 'Администратор' );
+
+INSERT INTO countries (name, image)
+VALUES('Ukraine', 'https://cf.ppt-online.org/files2/slide/e/eSlwcx6dTURr2mXCLnjNKyE4kHAPtZBpsFao1v/slide-2.jpg');
+
+INSERT INTO questions (question, id_country)
+VALUES('Перевод слова собака?', 1);
 
 INSERT INTO answers (answer, status, id_question)
 VALUES('cat',FALSE, 1);
@@ -73,5 +85,6 @@ VALUES('dog',TRUE, 1);
 
 INSERT INTO user_answers (id_user, id_answer)
 VALUES(1, 3);
+
 
 

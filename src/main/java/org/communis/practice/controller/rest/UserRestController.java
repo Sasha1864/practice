@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping(value = "admin/users")
 public class UserRestController {
 
+    @Autowired
     private final UserService userService;
 
     @Autowired

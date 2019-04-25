@@ -2,6 +2,7 @@ package org.communis.practice.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.communis.practice.entity.Country;
 import org.communis.practice.entity.Question;
 import org.communis.practice.entity.User;
 
@@ -21,6 +22,9 @@ public class QuestionWrapper implements ObjectWrapper<Question>, Serializable
     @Size(max = 100)
     private String question;
 
+    @NotNull
+    private Country country;
+
 
     public QuestionWrapper() {
 
@@ -37,6 +41,7 @@ public class QuestionWrapper implements ObjectWrapper<Question>, Serializable
         if(item!=null)
         {
             id = item.getId();
+            country = item.getCountry();
             question = item.getQuestion();
         }
     }
@@ -44,8 +49,8 @@ public class QuestionWrapper implements ObjectWrapper<Question>, Serializable
     @Override
     public void fromWrapper(Question item) {
         if(item!=null) {
-            item.setId(id);
             item.setQuestion(question);
+            item.setCountry(country);
         }
     }
 

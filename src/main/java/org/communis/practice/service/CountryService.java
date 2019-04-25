@@ -9,9 +9,11 @@ import org.communis.practice.exception.error.ErrorCodeConstants;
 import org.communis.practice.exception.error.ErrorInformationBuilder;
 import org.communis.practice.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CountryService {
 
     private CountryRepository countryRepository;

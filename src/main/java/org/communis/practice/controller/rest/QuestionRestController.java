@@ -1,13 +1,13 @@
 package org.communis.practice.controller.rest;
 
-import org.communis.practice.dto.MessageWrapper;
-import org.communis.practice.entity.Message;
+import org.communis.practice.dto.QuestionWrapper;
+import org.communis.practice.entity.Question;
 import org.communis.practice.exception.InvalidDataException;
 import org.communis.practice.exception.NotFoundException;
 import org.communis.practice.exception.ServerException;
 import org.communis.practice.exception.error.ErrorCodeConstants;
 import org.communis.practice.exception.error.ErrorInformationBuilder;
-import org.communis.practice.service.MessageService;
+import org.communis.practice.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,54 +18,54 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "messages")
-public class MessageRestController {
+@RequestMapping(value = "questions")
+public class QuestionRestController {
 
     @Autowired
-    private final MessageService messageService;
+    private final QuestionService questionService;
 
     @Autowired
-    public MessageRestController(MessageService messageService) {
-        this.messageService = messageService;
+    public QuestionRestController(QuestionService questionService) {
+        this.questionService = questionService;
     }
 
     @RequestMapping(value = "/add")
-    public void add(@Valid MessageWrapper messageWrapper, BindingResult bindingResult) throws InvalidDataException, ServerException {
+    public void add(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult) throws InvalidDataException, ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
-        messageService.add(messageWrapper);
+        questionService.add(questionWrapper);
     }
 
     @RequestMapping(value = "/edit")
-    public void edit(@Valid MessageWrapper messageWrapper, BindingResult bindingResult)
+    public void edit(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult)
             throws InvalidDataException, NotFoundException, ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
-        messageService.edit(messageWrapper);
+        questionService.edit(questionWrapper);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-    public Message getById(@Valid MessageWrapper messageWrapper, BindingResult bindingResult)
+    public Question getById(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult)
             throws InvalidDataException, NotFoundException, ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
-        return messageService.getById(messageWrapper.getId());
+        return questionService.getById(questionWrapper.getId());
     }
 
     @RequestMapping(value = "/list")
-    public List<Message> findAll(BindingResult bindingResult)
+    public List<Question> findAll(BindingResult bindingResult)
             throws InvalidDataException, NotFoundException, ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
-        return messageService.findAll();
+        return questionService.findAll();
     }
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String getCaInfo() {
-        return messageService.findAll().toString();
+        return questionService.findAll().toString();
     }
 }

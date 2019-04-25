@@ -36,6 +36,14 @@ public class Question {
     public void setQuestion(String question){
         this.question = question;
     }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 }
 
 

@@ -64,8 +64,4 @@ public class MessageRestController {
         return messageService.findAll();
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public String getCaInfo() {
-        return messageService.findAll().toString();
-    }
 }

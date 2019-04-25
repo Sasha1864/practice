@@ -64,8 +64,4 @@ public class QuestionRestController {
         return questionService.findAll();
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public String getCaInfo() {
-        return questionService.findAll().toString();
-    }
 }

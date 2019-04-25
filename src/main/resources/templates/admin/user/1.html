@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head"></head>
 <body>
 <div class="container">
-    <td th:text="${user.login}"></td>
+    <table class="bordered">
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Логин</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="user : ${users}">
+            <td th:text="|${user.getName()}|"></td>
+            <td th:text="${user.getSurname()}"></td>
+            <td th:text="${user.getLogin()}"></td>
+
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

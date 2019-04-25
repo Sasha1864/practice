@@ -63,8 +63,4 @@ public class CountryRestController {
         return countryService.findAll();
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public String getCaInfo() {
-        return countryService.findAll().toString();
-    }
 }

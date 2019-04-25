@@ -35,7 +35,7 @@ public class UserController {
         usersPage.addObject("page", userService.getPageByFilter(pageable, filterUserWrapper));
         return usersPage;*/
         ModelAndView usersPage = new ModelAndView(USER_VIEWS_PATH + "1");
-        usersPage.addObject("user", userService.getById((long)1));
+        usersPage.addObject("users", userService.findAll());
         /*usersPage.addObject("filter", filterUserWrapper);
         usersPage.addObject("page", userService.getPageByFilter(pageable, filterUserWrapper));*/
         return usersPage;

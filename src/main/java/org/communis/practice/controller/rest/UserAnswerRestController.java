@@ -51,12 +51,8 @@ public class UserAnswerRestController {
         return userAnswerService.getById(id);
     }
 
-    @RequestMapping(value = "/list")
-    public List<UserAnswer> findAll(BindingResult bindingResult)
-            throws ServerException {
-        if (bindingResult.hasErrors()) {
-            throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
-        }
+    @GetMapping(value = "/list")
+    public List<UserAnswer> findAll(){
         return userAnswerService.findAll();
     }
 

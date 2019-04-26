@@ -5,6 +5,7 @@ import org.communis.practice.entity.Question;
 import org.communis.practice.exception.ServerException;
 import org.communis.practice.service.AnswerService;
 import org.communis.practice.service.QuestionService;
+import org.communis.practice.service.UserAnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,18 +24,30 @@ public class TestRestController {
     private final AnswerService answerService;
 
     @Autowired
-    public TestRestController(QuestionService questionService, AnswerService answerService) {
+    private final UserAnswerService userAnswerService;
+
+    @Autowired
+    public TestRestController(QuestionService questionService, AnswerService answerService, UserAnswerService userAnswerService) {
         this.questionService = questionService;
         this.answerService = answerService;
+        this.userAnswerService = userAnswerService;
     }
 
-    @GetMapping(value = "{id}")
-    public List<Question> getQuestionsByCountryId(@PathVariable Long id) throws ServerException {
-        return questionService.getQuestionsByCountryId(id);
+    @GetMapping(value = "{userId}/{countryId}")
+    public List<Question> getQuestionsByCountryId(@PathVariable Long countryId) throws ServerException {
+        return questionService.getQuestionsByCountryId(countryId);
     }
-    @GetMapping(value = "{id}/{idQuestion}")
-    public List<Answer> getanswersByQuestionId(@PathVariable Long id, @PathVariable Long idQuestion) throws ServerException {
-        List<Answer> answers = answerService.getAnswersByQuestionId(idQuestion);
-        return answers;
+    @GetMapping(value = "{userId}/{countryId}/{idQuestion}")
+    public List<Answer> getAnswersByQuestionId(@PathVariable Long countryId, @PathVariable Long idQuestion) throws ServerException {
+        if(questionService.getQuestionsByCountryId(countryId).contains(questionService.getById(idQuestion))){
+            List<Answer> answers = answerService.getAnswersByQuestionId(idQuestion);
+            return answers;
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "{userId}/{countryId}/{idQuestion}/{idAnswer}")
+    public void addUserAnswer(@PathVariable Long userId, @PathVariable Long idAnswer) throws ServerException {
+        userAnswerService.add(userId, idAnswer);
     }
 }

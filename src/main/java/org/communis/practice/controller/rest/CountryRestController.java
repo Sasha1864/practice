@@ -50,12 +50,8 @@ public class CountryRestController {
         return countryService.getById(id);
     }
 
-    @RequestMapping(value = "/list")
-    public List<Country> findAll(BindingResult bindingResult)
-            throws ServerException {
-        if (bindingResult.hasErrors()) {
-            throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
-        }
+    @GetMapping(value = "/list")
+    public List<Country> findAll(){
         return countryService.findAll();
     }
 

@@ -1,6 +1,8 @@
 package org.communis.practice.service;
 
 import org.communis.practice.dto.UserAnswerWrapper;
+import org.communis.practice.entity.Answer;
+import org.communis.practice.entity.User;
 import org.communis.practice.entity.UserAnswer;
 import org.communis.practice.exception.ServerException;
 import org.communis.practice.exception.error.ErrorCodeConstants;
@@ -39,6 +41,13 @@ public class UserAnswerService {
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
         }
+    }
+
+    public void add(Answer answer, User user){
+        UserAnswer userAnswer = new UserAnswer();
+        userAnswer.setUser(user);
+        userAnswer.setAnswer(answer);
+        userAnswerRepository.save(userAnswer);
     }
 
     public void delete(Long id) {

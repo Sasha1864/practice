@@ -53,12 +53,4 @@ public class MessageService {
         return messageRepository.findAll();
     }
 
-    /*public Page getPageByFilter(Pageable pageable, ObjectFilter filterUserWrapper) throws ServerException {
-        try {
-            return messageRepository.findAll(UserSpecification.build(filterUserWrapper), pageable)
-                    .map(UserWrapper::new);
-        } catch (Exception ex) {
-            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_LIST_ERROR), ex);
-        }
-    }*/
 }

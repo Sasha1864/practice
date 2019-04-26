@@ -30,11 +30,9 @@ public abstract class UserSpecification implements Specification<User>
                     if (filter.getSearch() != null && !filter.getSearch().isEmpty())
                     {
                         predicates.add(cb.or(
-                                cb.like(cb.upper(root.get("login")), '%' + filter.getSearch().toUpperCase() + '%'),
-                                cb.like(cb.upper(root.get("mail")), '%' + filter.getSearch().toUpperCase() + '%'),
                                 cb.like(cb.upper(root.get("name")), '%' + filter.getSearch().toUpperCase() + '%'),
-                                cb.like(cb.upper(root.get("surname")), '%' + filter.getSearch().toUpperCase() + '%'),
-                                cb.like(cb.upper(root.get("secondName")), '%' + filter.getSearch().toUpperCase() + '%')));
+                                cb.like(cb.upper(root.get("surname")), '%' + filter.getSearch().toUpperCase() + '%')
+                                ));
                     }
                 }
                 return cb.and((Predicate[]) predicates.toArray(new Predicate[predicates.size()]));

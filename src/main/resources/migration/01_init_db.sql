@@ -71,8 +71,17 @@ VALUES(1,2, 'Администратор' );
 INSERT INTO countries (name, image)
 VALUES('Ukraine', 'https://cf.ppt-online.org/files2/slide/e/eSlwcx6dTURr2mXCLnjNKyE4kHAPtZBpsFao1v/slide-2.jpg');
 
+INSERT INTO countries (name, image)
+VALUES('Poland', 'https://cf.ppt-online.org/files2/slide/e/eSlwcx6dTURr2mXCLnjNKyE4kHAPtZBpsFao1v/slide-2.jpg');
+
 INSERT INTO questions (question, id_country)
 VALUES('Перевод слова собака?', 1);
+
+INSERT INTO questions (question, id_country)
+VALUES('Перевод слова кот?', 1);
+
+INSERT INTO questions (question, id_country)
+VALUES('Перевод слова море?', 2);
 
 INSERT INTO answers (answer, status, id_question)
 VALUES('cat',FALSE, 1);
@@ -82,6 +91,18 @@ VALUES('elephant',FALSE, 1);
 
 INSERT INTO answers (answer, status, id_question)
 VALUES('dog',TRUE, 1);
+
+INSERT INTO answers (answer, status, id_question)
+VALUES('cat',TRUE, 2);
+
+INSERT INTO answers (answer, status, id_question)
+VALUES('elephant',FALSE, 2);
+
+INSERT INTO answers (answer, status, id_question)
+VALUES('sea',TRUE, 3);
+
+INSERT INTO answers (answer, status, id_question)
+VALUES('grey',FALSE, 3);
 
 INSERT INTO user_answers (id_user, id_answer)
 VALUES(1, 3);

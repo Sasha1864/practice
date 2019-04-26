@@ -1,6 +1,7 @@
 package org.communis.practice.controller.rest;
 
 import org.communis.practice.dto.QuestionWrapper;
+import org.communis.practice.entity.Answer;
 import org.communis.practice.entity.Question;
 import org.communis.practice.exception.InvalidDataException;
 import org.communis.practice.exception.ServerException;
@@ -30,7 +31,7 @@ public class QuestionRestController {
     }
 
     @RequestMapping(value = "/add")
-    public void add(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult) throws InvalidDataException, ServerException {
+    public void add(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
@@ -60,4 +61,22 @@ public class QuestionRestController {
         return questionService.findAll();
     }
 
+    @GetMapping(value = "{userId}/{countryId}")
+    public List<Question> getQuestionsByCountryId(@PathVariable Long countryId) throws ServerException {
+        return questionService.getQuestionsByCountryId(countryId);
+    }
+
+    @GetMapping(value = "{userId}/{countryId}/{idQuestion}")
+    public List<Answer> getAnswersByQuestionId(@PathVariable Long countryId, @PathVariable Long idQuestion) throws ServerException {
+        if(questionService.getQuestionsByCountryId(countryId).contains(questionService.getById(idQuestion))){
+            List<Answer> answers = questionService.getAnswersByQuestionId(idQuestion);
+            return answers;
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "{userId}/{countryId}/{idQuestion}/{idAnswer}")
+    public void addUserAnswer(@PathVariable Long userId, @PathVariable Long idAnswer) {
+        questionService.addUserAnswer(userId, idAnswer);
+    }
 }

@@ -5,12 +5,15 @@ import org.communis.practice.dto.QuestionWrapper;
 import org.communis.practice.dto.UserWrapper;
 import org.communis.practice.dto.filters.QuestionFilterWrapper;
 import org.communis.practice.dto.filters.UserFilterWrapper;
-import org.communis.practice.entity.Country;
-import org.communis.practice.entity.Question;
+import org.communis.practice.entity.*;
 import org.communis.practice.exception.ServerException;
 import org.communis.practice.exception.error.ErrorCodeConstants;
 import org.communis.practice.exception.error.ErrorInformationBuilder;
+import org.communis.practice.repository.AnswerRepository;
 import org.communis.practice.repository.QuestionRepository;
+import org.communis.practice.repository.UserAnswerRepository;
+import org.communis.practice.repository.UserRepository;
+import org.communis.practice.repository.specifications.AnswerSpecification;
 import org.communis.practice.repository.specifications.QuestionSpecification;
 import org.communis.practice.repository.specifications.UserSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +27,16 @@ import java.util.List;
 public class QuestionService {
 
     private QuestionRepository questionRepository;
+    private UserAnswerRepository userAnswerRepository;
+    private UserRepository userRepository;
+    private AnswerRepository answerRepository;
+
     @Autowired
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, UserAnswerRepository userAnswerRepository, UserRepository userRepository, AnswerRepository answerRepository) {
         this.questionRepository = questionRepository;
+        this.userAnswerRepository = userAnswerRepository;
+        this.userRepository = userRepository;
+        this.answerRepository = answerRepository;
     }
 
     public Question getById(Long id) {
@@ -51,6 +61,14 @@ public class QuestionService {
         }
     }
 
+    public void addUserAnswer(Long userId, Long answerId){
+        User user = userRepository.findById(userId);
+        Answer answer = answerRepository.findById(answerId);
+        UserAnswer userAnswer = new UserAnswer();
+        userAnswer.setUser(user);
+        userAnswer.setAnswer(answer);
+        userAnswerRepository.save(userAnswer);
+    }
     public void delete(Long id) {
         questionRepository.delete(id);
     }
@@ -68,4 +86,13 @@ public class QuestionService {
            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_LIST_ERROR), ex);
        }
    }
+    public List<Answer> getAnswersByQuestionId(Long id) throws ServerException {
+        try {
+            AnswerSpecification spec = new AnswerSpecification(id);
+            List<Answer> result = answerRepository.findAll(spec);
+            return result;
+        } catch (Exception ex) {
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_LIST_ERROR), ex);
+        }
+    }
 }

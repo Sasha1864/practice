@@ -59,7 +59,7 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-   public List<Question> getQuestionsByCountry(Long id) throws ServerException {
+   public List<Question> getQuestionsByCountryId(Long id) throws ServerException {
        try {
            QuestionSpecification spec = new QuestionSpecification(id);
            List<Question> result = questionRepository.findAll(spec);

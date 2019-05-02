@@ -47,11 +47,7 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "/list")
-    public List<User> findAll(BindingResult bindingResult)
-            throws ServerException {
-        if (bindingResult.hasErrors()) {
-            throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
-        }
+    public List<User> findAll(){
         return userService.findAll();
     }
 

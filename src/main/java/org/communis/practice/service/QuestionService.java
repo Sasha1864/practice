@@ -21,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -46,7 +47,7 @@ public class QuestionService {
     public void add(QuestionWrapper questionWrapper) {
         Question question = new Question();
         questionWrapper.fromWrapper(question);
-
+        question.setDateCreate(new Date());
         questionRepository.save(question);
     }
 
@@ -66,11 +67,13 @@ public class QuestionService {
         Answer answer = answerRepository.findById(answerId);
         UserAnswer userAnswer = new UserAnswer();
         userAnswer.setUser(user);
+        userAnswer.setDateCreate(new Date());
         userAnswer.setAnswer(answer);
         userAnswerRepository.save(userAnswer);
     }
     public void delete(Long id) {
-        questionRepository.delete(id);
+        Question question = questionRepository.findById(id);
+        question.setDateClose(new Date());
     }
 
     public List<Question> findAll() {

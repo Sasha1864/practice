@@ -2,6 +2,7 @@
 package org.communis.practice.service;
 
 import org.communis.practice.dto.MessageWrapper;
+import org.communis.practice.entity.Country;
 import org.communis.practice.entity.Message;
 import org.communis.practice.exception.ServerException;
 import org.communis.practice.exception.error.ErrorCodeConstants;
@@ -10,6 +11,7 @@ import org.communis.practice.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,6 +31,7 @@ public class MessageService {
 
     public void add(MessageWrapper messageWrapper) {
         Message message = new Message();
+        message.setDateCreate(new Date());
         messageWrapper.fromWrapper(message);
 
         messageRepository.save(message);
@@ -46,7 +49,8 @@ public class MessageService {
     }
 
     public void delete(Long id) {
-        messageRepository.delete(id);
+        Message message = messageRepository.findById(id);
+        message.setDateClose(new Date());
     }
 
     public List<Message> findAll() {

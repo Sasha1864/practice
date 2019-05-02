@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <table class="bordered">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Картинка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="country : ${countries}">
+            <td th:text="|${country.getName()}|"></td>
+            <td><img width="189" height="255" th:src="|${country.getImage()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

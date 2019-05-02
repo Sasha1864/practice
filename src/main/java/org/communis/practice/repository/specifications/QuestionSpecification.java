@@ -22,9 +22,7 @@ public class QuestionSpecification implements Specification<Question> {
     public Predicate toPredicate(Root<Question> root, CriteriaQuery<?> cq, CriteriaBuilder cb)
     {
         final List predicates = new ArrayList();
-        predicates.add(cb.or(
-                cb.equal(root.get("country").get("id"), idCountry)
-        ));
+        predicates.add(cb.equal(root.get("country").get("id"), idCountry));
         return cb.and((Predicate[]) predicates.toArray(new Predicate[predicates.size()]));
     }
 }

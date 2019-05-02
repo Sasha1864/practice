@@ -11,6 +11,7 @@ import org.communis.practice.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,6 +29,7 @@ public class CountryService {
 
     public void add(CountryWrapper countryWrapper) {
         Country country = new Country();
+        country.setDateCreate(new Date());
         countryWrapper.fromWrapper(country);
 
         countryRepository.save(country);
@@ -45,7 +47,8 @@ public class CountryService {
     }
 
     public void delete(Long id) {
-        countryRepository.delete(id);
+        Country country = countryRepository.findById(id);
+        country.setDateClose(new Date());
     }
 
     public List<Country> findAll() {

@@ -26,4 +26,12 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_create")
+    private Date dateCreate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_close")
+    private Date dateClose;
 }

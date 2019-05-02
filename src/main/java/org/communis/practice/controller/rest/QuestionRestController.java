@@ -10,10 +10,7 @@ import org.communis.practice.exception.error.ErrorInformationBuilder;
 import org.communis.practice.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,7 +27,7 @@ public class QuestionRestController {
         this.questionService = questionService;
     }
 
-    @RequestMapping(value = "/add")
+    @PostMapping(value = "questions/add")
     public void add(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
@@ -38,7 +35,7 @@ public class QuestionRestController {
         questionService.add(questionWrapper);
     }
 
-    @RequestMapping(value = "/edit")
+    @PutMapping(value = "/edit")
     public void edit(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult)
             throws ServerException {
         if (bindingResult.hasErrors()) {
@@ -52,12 +49,8 @@ public class QuestionRestController {
         return questionService.getById(id);
     }
 
-    @RequestMapping(value = "/list")
-    public List<Question> findAll(BindingResult bindingResult)
-            throws ServerException {
-        if (bindingResult.hasErrors()) {
-            throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
-        }
+    @GetMapping(value = "")
+    public List<Question> findAll(){
         return questionService.findAll();
     }
 
@@ -66,17 +59,17 @@ public class QuestionRestController {
         return questionService.getQuestionsByCountryId(countryId);
     }
 
-    @GetMapping(value = "{userId}/{countryId}/{idQuestion}")
-    public List<Answer> getAnswersByQuestionId(@PathVariable Long countryId, @PathVariable Long idQuestion) throws ServerException {
-        if(questionService.getQuestionsByCountryId(countryId).contains(questionService.getById(idQuestion))){
-            List<Answer> answers = questionService.getAnswersByQuestionId(idQuestion);
+    @GetMapping(value = "{userId}/{countryId}/{questionId}")
+    public List<Answer> getAnswersByQuestionId(@PathVariable Long countryId, @PathVariable Long questionId) throws ServerException {
+        if(questionService.getQuestionsByCountryId(countryId).contains(questionService.getById(questionId))){
+            List<Answer> answers = questionService.getAnswersByQuestionId(questionId);
             return answers;
         }
         return null;
     }
 
-    @RequestMapping(value = "{userId}/{countryId}/{idQuestion}/{idAnswer}")
-    public void addUserAnswer(@PathVariable Long userId, @PathVariable Long idAnswer) {
-        questionService.addUserAnswer(userId, idAnswer);
+    @PostMapping(value = "{userId}/{countryId}/{questionId}/{answerId}")
+    public void addUserAnswer(@PathVariable Long userId, @PathVariable Long answerId) {
+        questionService.addUserAnswer(userId, answerId);
     }
 }

@@ -3,6 +3,7 @@ package org.communis.practice.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -19,4 +20,12 @@ public class UserAnswer {
     @ManyToOne
     @JoinColumn(name = "id_answer")
     private Answer answer;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_create")
+    private Date dateCreate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_update")
+    private Date dateUpdate;
 }

@@ -1,0 +1,51 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .button1 {
+    width: 100px;
+    margin-left: 0 !important;
+  }
+  
+  .v-card__actions {
+    margin-left: 17px;
+  }
+  
+  .v-card__text {
+    margin-bottom: 0 !important;
+  }
+  
+  .err1 {
+    padding-left: 12px !important;
+    color: red;
+  }
+  
+  .conf {
+    width: 100%;
+    justify-content: center !important;
+    text-align: center !important;
+    align-items: center !important;
+    padding-bottom: 24px;
+    text-transform: uppercase;
+  }
+  
+  .v-toolbar {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
+    height: 90px;
+  }
+  
+  .user-form {
+    max-width: 340px !important;
+  
+    &-logo {
+      margin: 0 auto;
+      padding: 24px;
+      box-sizing: content-box;
+      width: 80px;
+      height: auto;
+      display: block;
+    }
+  }
+  

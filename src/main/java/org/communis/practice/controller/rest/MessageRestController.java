@@ -52,11 +52,7 @@ public class MessageRestController {
     }
 
     @RequestMapping(value = "/list")
-    public List<Message> findAll(BindingResult bindingResult)
-            throws ServerException {
-        if (bindingResult.hasErrors()) {
-            throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
-        }
+    public List<Message> findAll(){
         return messageService.findAll();
     }
 

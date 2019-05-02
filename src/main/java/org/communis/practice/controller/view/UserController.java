@@ -5,6 +5,7 @@ import org.communis.practice.dto.UserWrapper;
 import org.communis.practice.dto.filters.UserFilterWrapper;
 import org.communis.practice.entity.User;
 import org.communis.practice.exception.ServerException;
+import org.communis.practice.service.CountryService;
 import org.communis.practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Log4j2
 @Controller
-@RequestMapping(value = "admin/users")
+@RequestMapping(value = "admin")
 public class UserController {
     private String USER_VIEWS_PATH = "admin/user/";
 
@@ -24,27 +25,25 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    private  final CountryService countryService;
+
+    @Autowired
+    public UserController(UserService userService, CountryService countryService) {
         this.userService = userService;
+        this.countryService = countryService;
     }
 
-    @RequestMapping(value = "")
-    public ModelAndView list(Pageable pageable, UserFilterWrapper filterUserWrapper) throws ServerException {
-        /*ModelAndView usersPage = new ModelAndView(USER_VIEWS_PATH + "list");
-        usersPage.addObject("filter", filterUserWrapper);
-        usersPage.addObject("page", userService.getPageByFilter(pageable, filterUserWrapper));
-        return usersPage;*/
+    @RequestMapping(value = "users")
+    public ModelAndView list(Pageable pageable, UserFilterWrapper filterUserWrapper) {
         ModelAndView usersPage = new ModelAndView(USER_VIEWS_PATH + "1");
         usersPage.addObject("users", userService.findAll());
-        /*usersPage.addObject("filter", filterUserWrapper);
-        usersPage.addObject("page", userService.getPageByFilter(pageable, filterUserWrapper));*/
         return usersPage;
     }
 
-    /*@RequestMapping("/")
-    public void test(){
-        System.out.println(userService.getById((long)1));
+    @RequestMapping("countries")
+    public ModelAndView countriesList(){
+        ModelAndView usersPage = new ModelAndView(USER_VIEWS_PATH + "countries");
+        usersPage.addObject("countries", countryService.findAll());
+        return usersPage;
     }
-*/
-
 }

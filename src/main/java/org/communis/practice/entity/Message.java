@@ -3,6 +3,7 @@ package org.communis.practice.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Data
@@ -25,6 +26,13 @@ public class Message {
     @Column(name = "message")
     private String message;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_create")
+    private Date dateCreate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_close")
+    private Date dateClose;
 }
 
 

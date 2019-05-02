@@ -24,15 +24,11 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
     @Size(max = 100)
     private String surname;
 
-    @Size(max = 100)
-    private String secondName;
-
     @NotNull
     @Size(max = 20)
     private String login;
 
     @JsonIgnore
-    @Size(min = 8, max = 20)
     private String password;
 
 
@@ -68,17 +64,4 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
             item.setPassword(password);
         }
     }
-
-    public String getFio() {
-        return surname + " " + name + (secondName != null ? " " + secondName : "");
-    }
-
-    /*@AssertTrue
-    public boolean isPasswordValid() {
-        return (password == null && confirmPassword == null) ||
-                (password != null && confirmPassword != null && password.equals(confirmPassword));
-    }*/
-
-
-
 }

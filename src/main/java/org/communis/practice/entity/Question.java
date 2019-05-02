@@ -3,6 +3,7 @@ package org.communis.practice.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Data
@@ -20,6 +21,14 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "id_country")
     private Country country;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_create")
+    private Date dateCreate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_close")
+    private Date dateClose;
 
 }
 

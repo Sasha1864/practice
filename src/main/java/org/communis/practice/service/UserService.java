@@ -2,6 +2,7 @@ package org.communis.practice.service;
 
 import org.communis.practice.dto.UserWrapper;
 import org.communis.practice.dto.filters.UserFilterWrapper;
+import org.communis.practice.entity.Message;
 import org.communis.practice.entity.User;
 import org.communis.practice.exception.ServerException;
 import org.communis.practice.exception.error.ErrorCodeConstants;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,6 +34,7 @@ public class UserService{
     public void add(UserWrapper userWrapper) {
         User user = new User();
         userWrapper.fromWrapper(user);
+        user.setDateCreate(new Date());
         userRepository.save(user);
     }
 
@@ -47,7 +50,9 @@ public class UserService{
     }
 
     public void delete(Long id) {
-        userRepository.delete(id);
+        User user = userRepository.findById(id);
+        user.setDateClose(new Date());
+
     }
 
     public List<User> findAll() {

@@ -7,10 +7,6 @@ Vue.use(Router);
 const router = new Router({
   routes: [
     {
-      path: '/',
-      component: () => import('@/pages/Main'),
-    },
-    {
       name: 'login',
       path: '/login',
       component: () => import('@/pages/login/Login'),
@@ -23,7 +19,12 @@ const router = new Router({
     {
       name: 'ok',
       path: '/ok',
-      component: () => import('@/pages/pa'),
+      component: () => import('@/pages/main/Main'),
+    },
+    {
+      name: 'test',
+      path: '/test',
+      component: () => import('@/pages/test/Test'),
     },
   ],
 });

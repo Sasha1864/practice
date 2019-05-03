@@ -8,7 +8,7 @@ module.exports = {
     },
     proxy: {
       '^/api': {
-        target: 'http://localhost:3000/',
+        target: 'http://192.168.38.173:8088/',
         ws: true,
         proxyTimeout: 5000,
       },

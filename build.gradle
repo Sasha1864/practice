@@ -22,6 +22,7 @@ plugins {
     id "idea"
     id "org.springframework.boot" version "1.5.13.RELEASE"
     id "nebula.release" version "6.0.2"
+    id "nebula.docker" version "1.1.1"
 }
 
 apply plugin: 'propdeps'
@@ -99,4 +100,14 @@ tasks.withType(Javadoc) {
 task wrapper(type: Wrapper) {
     gradleVersion = '4.2'
     distributionUrl = "https\\://services.gradle.org/distributions/gradle-${gradleVersion}-bin.zip"
+}
+
+nebulaDocker {
+    maintainerEmail = 'aleksandra.zaitseva.73@mail.ru'
+    dockerBase = 'java:openjdk-8-jre'
+    dockerImage = {
+        exposePort 8080
+    }
+
+    tagVersion = { "$project.name-$project.version" }
 }

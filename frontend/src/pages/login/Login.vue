@@ -32,6 +32,14 @@
                   >
                     Вход</v-btn
                   >
+                  <v-btn
+                    class="button1"
+                    color="primary"
+                    type="submit"
+                    @click="register"
+                  >
+                    Регистрация</v-btn
+                  >
                 </v-form>
                 <p v-if="stat == 'error'" class="err1">
                   <!-- Неверный логин или пароль -->

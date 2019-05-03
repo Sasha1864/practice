@@ -1,3 +1,7 @@
+/* eslint-disable global-require */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-var */
+/* eslint-disable space-before-blocks */
 import Vue from 'vue';
 
 const localVue = new Vue();
@@ -13,30 +17,15 @@ const getters = {
 
 const actions = {// eslint-disable-next-line
   AUTH_REQUEST: ({ commit, dispatch }, user) => new Promise((resolve, reject) => {
-    localVue.$Axios.post('/api/login', user)
-      .then((resp) => {
-        // eslint-disable-next-line
-        const token = resp.data.token;
-        localStorage.setItem('user-token', token);
-        commit('SET_TOKEN', token);
-
-        const auth = `Bearer ${token}`;
-        localVue.$Axios.defaults.headers.common.Authorization = auth;
-
-        resolve(resp);
-      })
-      .catch((err) => {
-        localStorage.removeItem('user-token');
-        reject(err);
-      });
-  }),
-
-  AUTH_LOGOUT: ({ commit }) => new Promise((resolve) => {
-    localStorage.removeItem('user-token');
-    commit('SET_TOKEN', '');
-    delete localVue.$Axios.defaults.headers.common.Authorization;
-
-    resolve();
+    // eslint-disable-next-line import/no-unresolved
+    const users = JSON.parse('[{"login":"admin","password":"1234"}, {"login":"user","password":"12345"}]');
+    console.log(users);
+    users.forEach(function (element) {
+      if (element.login === user.login && element.password === user.password) {
+        resolve();
+      }
+    });
+    reject();
   }),
 };
 

@@ -64,7 +64,6 @@
                   v-if="stat == 'error'"
                   class="err1"
                 >
-                  <!-- Неверный логин или пароль -->
                 </p>
               </v-card-text>
             </v-card>

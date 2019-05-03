@@ -21,12 +21,6 @@ export default {
 
   methods: {
     register: function () {
-      const { login, password } = this;
-      this.$store.dispatch('user/AUTH_REQUEST', { login, password }).then(() => {
-        this.$router.push('/ok');
-      }).catch(() => {
-        console.log('authorization error');
-      });
     },
   },
   computed: {

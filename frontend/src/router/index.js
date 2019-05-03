@@ -15,15 +15,25 @@ const router = new Router({
       path: '/login',
       component: () => import('@/pages/login/Login'),
     },
+    {
+      name: 'register',
+      path: '/register',
+      component: () => import('@/pages/register/Register'),
+    },
+    {
+      name: 'ok',
+      path: '/ok',
+      component: () => import('@/pages/pa'),
+    },
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  if (!store.getters['user/isAuthenticated'] && to.path !== '/login') {
-    next('/login');
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (!store.getters['user/isAuthenticated'] && to.path !== '/login') {
+//     next('/login');
+//   } else {
+//     next();
+//   }
+// );
 
 export default router;

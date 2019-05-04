@@ -22,10 +22,20 @@ const actions = {// eslint-disable-next-line
         reject(err);
       });
   }),
-  GET_ANSWERS: ({ commit, dispatch }, questionId, countryId) => new Promise((resolve, reject) => {
-    const url = 'http://192.168.38.173:8088/questions/1/1/1';
-    console.log(url);
+  GET_ANSWERS: ({ commit, dispatch }, question) => new Promise((resolve, reject) => {
+    const url = `http://192.168.38.173:8088/questions/{userId}/${question.countryId}/${question.questionId}`;
     fetch(url)
+      .then((resp) => {
+        resolve(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  }),
+  SAVE_ANSWER: ({ commit, dispatch }, answer) => new Promise((resolve, reject) => {
+    const url = `http://192.168.38.173:8088/questions/${answer.userId}/{countryId}/{questionId}/${answer.id}`;
+    fetch(url, { method: 'POST' })
       .then((resp) => {
         resolve(resp);
       })

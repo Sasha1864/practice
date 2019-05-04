@@ -15,14 +15,18 @@
             </template>
             <span>Кликни, чтобы выбрать страну</span>
           </v-tooltip>
+           <v-btn
+                color="primary"
+                dark
+              >Настройки</v-btn>
         </template>
         <v-list>
           <v-list-tile
-            v-for="(item, index) in items"
-            :key="index"
-            @click="func"
+            v-for="country in countries"
+            :key="country.name"
+            @click="func(country)"
           >
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title>{{ country.name }}</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>

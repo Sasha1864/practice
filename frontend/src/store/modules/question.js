@@ -12,7 +12,7 @@ const getters = {
 
 const actions = {// eslint-disable-next-line
     GET_QUESTION: ({ commit, dispatch }, countryId) => new Promise((resolve, reject) => {
-    const url = `http://192.168.38.173:8088/questions/${countryId}`;
+    const url = `http://192.168.38.173:8088/questions/{userId}/${countryId}`;
     fetch(url)
       .then((resp) => {
         resolve(resp);
@@ -23,7 +23,7 @@ const actions = {// eslint-disable-next-line
       });
   }),
   GET_ANSWERS: ({ commit, dispatch }, question) => new Promise((resolve, reject) => {
-    const url = `http://192.168.38.173:8088/questions/{userId}/${question.countryId}/${question.questionId}`;
+    const url = `http://192.168.38.173:8088/questions/{userId}/${question.countryId}/${question.id}`;
     fetch(url)
       .then((resp) => {
         resolve(resp);

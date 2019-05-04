@@ -23,8 +23,13 @@ const router = new Router({
     },
     {
       name: 'test',
-      path: '/test',
+      path: '/test/:id',
       component: () => import('@/pages/test/Test'),
+    },
+    {
+      name: 'setting',
+      path: '/setting',
+      component: () => import('@/pages/settings/Setting.vue'),
     },
   ],
 });

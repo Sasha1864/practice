@@ -18,6 +18,7 @@
            <v-btn
                 color="primary"
                 dark
+                @click="settings"
               >Настройки</v-btn>
         </template>
         <v-list>

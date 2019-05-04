@@ -12,6 +12,9 @@ export default {
       const countryId = country.id;
       this.$router.push({ name: 'test', params: { id: countryId } });
     },
+    settings: function () {
+      this.$router.push('/setting');
+    },
   },
   mounted() {
     const self = this;

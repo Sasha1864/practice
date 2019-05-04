@@ -17,7 +17,7 @@
             <v-text-field
               ref="url "
               v-model="img"
-              :rules="[() => !!name || 'Это поле пустое']"
+              :rules="[() => !!img || 'Это поле пустое']"
               :error-messages="errorMessages"
               label="url картинки"
                placeholder="http://"
@@ -26,26 +26,6 @@
           </v-card-text>
           <v-divider class="mt-5"></v-divider>
           <v-card-actions>
-            <v-btn flat>Отмена</v-btn>
-            <v-spacer></v-spacer>
-            <v-slide-x-reverse-transition>
-              <v-tooltip
-                v-if="formHasErrors"
-                left
-              >
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    class="my-0"
-                    @click="resetForm"
-                    v-on="on"
-                  >
-                    <v-icon>refresh</v-icon>
-                  </v-btn>
-                </template>
-                <span>Refresh form</span>
-              </v-tooltip>
-            </v-slide-x-reverse-transition>
             <v-btn color="primary" flat @click="submit">Добавить</v-btn>
           </v-card-actions>
         </v-card>
@@ -54,7 +34,7 @@
             <v-text-field
               ref="question"
               v-model="question"
-              :rules="[() => !!name || 'Это поле пустое']"
+              :rules="[() => !!question || 'Это поле пустое']"
               :error-messages="errorMessages"
               label="Вопрос"
                placeholder="Введите вопрос..."
@@ -71,7 +51,6 @@
                     icon
                     class="my-0"
                     @click="addAnswer"
-                    v-on="on"
                   >
                     <v-icon>add</v-icon>
                   </v-btn>
@@ -86,26 +65,6 @@
              </v-card-text>
              <v-divider class="mt-5"></v-divider>
             <v-card-actions>
-            <v-btn flat>Отмена</v-btn>
-            <v-spacer></v-spacer>
-            <v-slide-x-reverse-transition>
-              <v-tooltip
-                v-if="formHasErrors"
-                left
-              >
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    class="my-0"
-                    @click="resetForm"
-                    v-on="on"
-                  >
-                    <v-icon>refresh</v-icon>
-                  </v-btn>
-                </template>
-                <span>Refresh form</span>
-              </v-tooltip>
-            </v-slide-x-reverse-transition>
             <v-btn color="primary" flat @click="submit">Добавить</v-btn>
           </v-card-actions>
         </v-card>

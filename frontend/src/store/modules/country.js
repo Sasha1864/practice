@@ -12,7 +12,7 @@ const getters = {
 
 const actions = {
   GET_LIST: ({ commit, dispatch }) => new Promise((resolve, reject) => {
-    const url = 'http://192.168.38.173:8088/countries/list';
+    const url = 'http://localhost:8080/countries/list';
     fetch(url)
       .then((resp) => {
         resolve(resp);
@@ -23,7 +23,7 @@ const actions = {
       });
   }),
   GET_COUNTRY: ({ commit, dispatch }, countryId) => new Promise((resolve, reject) => {
-    const url = `http://192.168.38.173:8088/countries/${countryId}`;
+    const url = `http://localhost:8080/countries/${countryId}`;
     fetch(url)
       .then((resp) => {
         resolve(resp);

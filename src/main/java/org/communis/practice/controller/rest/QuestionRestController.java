@@ -3,6 +3,7 @@ package org.communis.practice.controller.rest;
 import org.communis.practice.dto.QuestionWrapper;
 import org.communis.practice.entity.Answer;
 import org.communis.practice.entity.Question;
+import org.communis.practice.entity.UserAnswer;
 import org.communis.practice.exception.InvalidDataException;
 import org.communis.practice.exception.ServerException;
 import org.communis.practice.exception.error.ErrorCodeConstants;
@@ -50,25 +51,27 @@ public class QuestionRestController {
     }
 
     @GetMapping(value = "")
-    public List<Question> findAll(){
-        return questionService.findAll();
+    public List<Question> findAllQuestions(){
+        return questionService.findAllQuestions();
     }
 
-    @GetMapping(value = "{userId}/{countryId}")
+    @GetMapping(value = "userAnswers")
+    public List<UserAnswer> findAllUserAnswers(){
+        return questionService.findAllUserAnswers();
+    }
+
+    @GetMapping(value = "country/{countryId}")
     public List<Question> getQuestionsByCountryId(@PathVariable Long countryId) throws ServerException {
         return questionService.getQuestionsByCountryId(countryId);
     }
 
-    @GetMapping(value = "{userId}/{countryId}/{questionId}")
-    public List<Answer> getAnswersByQuestionId(@PathVariable Long countryId, @PathVariable Long questionId) throws ServerException {
-        if(questionService.getQuestionsByCountryId(countryId).contains(questionService.getById(questionId))){
-            List<Answer> answers = questionService.getAnswersByQuestionId(questionId);
-            return answers;
-        }
-        return null;
+    @GetMapping(value = "answers/{questionId}")
+    public List<Answer> getAnswersByQuestionId(@PathVariable Long questionId) throws ServerException {
+        List<Answer> answers = questionService.getAnswersByQuestionId(questionId);
+        return answers;
     }
 
-    @PostMapping(value = "{userId}/{countryId}/{questionId}/{answerId}")
+    @PostMapping(value = "save/{userId}/{answerId}")
     public void addUserAnswer(@PathVariable Long userId, @PathVariable Long answerId) {
         questionService.addUserAnswer(userId, answerId);
     }

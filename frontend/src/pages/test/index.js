@@ -2,18 +2,21 @@ export default {
   data() {
     return {
       questions: [],
-      country: { id: 1, name: 'name', img: '' },
-      answers: [],
-      selectedAnswer: '',
+      country: { id: 1, image: '', name: 'name' },
+      selectedAnswers: [],
       countryId: this.$route.params.id,
+      numberOfTrueAnswers: '',
     };
   },
   methods: {
     saveAnswer: function () {
+      const self = this;
       const userId = 1;
-      const { id } = this.selectedAnswer;
-      console.log(id);
-      this.$store.dispatch('question/SAVE_ANSWER', { userId, id });
+      this.selectedAnswers.forEach((element) => {
+        const { id } = element;
+        self.$store.dispatch('question/SAVE_ANSWER', { userId, id });
+      });
+      this.numberOfTrueAnswers = this.selectedAnswers.filter(value => value.status === true).length;
     },
   },
 
@@ -21,48 +24,22 @@ export default {
     const self = this;
     this.$store.dispatch('country/GET_COUNTRY', this.countryId).then(
       (result) => {
-        result.json().then(function (data) {
-          self.country.id = data.id;
-          self.country.name = data.name;
-          self.country.img = data.image;
-        });
+        result.json().then(function (data) { self.country = data; });
       },
     );
-    this.$store.dispatch('question/GET_QUESTION', this.countryId).then(
-      (result) => {
-        result.json().then(function (data) {
-          data.forEach((element) => {
-            const { id, question } = element;
-            self.questions.push({ name: question, id: id });
-            const { countryId } = self;
-            console.log(countryId, id);
-            self.$store.dispatch('question/GET_ANSWERS', { countryId, id }).then(
-              (response) => {
-                response.json().then(function (answers) {
-                  answers.forEach((answer) => {
-                    // const { id, question } = element
-                    console.log(element);
-                    self.answers.push(answer);
-                  });
-                  console.log(answers);
-                });
-              },
-            );
-          });
+    this.$store.dispatch('question/GET_QUESTIONS', this.countryId).then((result) => {
+      result.json().then(function (data) {
+        data.forEach((element) => {
+          const { id, question } = element;
+          self.$store.dispatch('question/GET_ANSWERS', id).then(
+            (response) => {
+              response.json().then(function (answers) {
+                self.questions.push({ id, question, answers });
+              });
+            },
+          );
         });
-      },
-    ).then(() => {
-      // const countryId = self.country.id;
-      // const questionId = self.question.id;
-      // this.$store.dispatch('question/GET_ANSWERS', { countryId, questionId }).then(
-      //   (result) => {
-      //     result.json().then(function (answers) {
-      //       answers.forEach((element) => {
-      //         self.answers.push(element);
-      //       });
-      //     });
-      //   },
-      // );
+      });
     });
   },
 };

@@ -76,8 +76,12 @@ public class QuestionService {
         question.setDateClose(new Date());
     }
 
-    public List<Question> findAll() {
+    public List<Question> findAllQuestions() {
         return questionRepository.findAll();
+    }
+
+    public List<UserAnswer> findAllUserAnswers() {
+        return userAnswerRepository.findAll();
     }
 
    public List<Question> getQuestionsByCountryId(Long id) throws ServerException {

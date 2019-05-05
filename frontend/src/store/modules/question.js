@@ -11,8 +11,8 @@ const getters = {
 };
 
 const actions = {// eslint-disable-next-line
-    GET_QUESTION: ({ commit, dispatch }, countryId) => new Promise((resolve, reject) => {
-    const url = `http://192.168.38.173:8088/questions/{userId}/${countryId}`;
+    GET_QUESTIONS: ({ commit, dispatch }, countryId) => new Promise((resolve, reject) => {
+    const url = `http://localhost:8080/questions/country/${countryId}`;
     fetch(url)
       .then((resp) => {
         resolve(resp);
@@ -22,8 +22,8 @@ const actions = {// eslint-disable-next-line
         reject(err);
       });
   }),
-  GET_ANSWERS: ({ commit, dispatch }, question) => new Promise((resolve, reject) => {
-    const url = `http://192.168.38.173:8088/questions/{userId}/${question.countryId}/${question.id}`;
+  GET_ANSWERS: ({ commit, dispatch }, questionId) => new Promise((resolve, reject) => {
+    const url = `http://localhost:8080/questions/answers/${questionId}`;
     fetch(url)
       .then((resp) => {
         resolve(resp);
@@ -34,7 +34,7 @@ const actions = {// eslint-disable-next-line
       });
   }),
   SAVE_ANSWER: ({ commit, dispatch }, answer) => new Promise((resolve, reject) => {
-    const url = `http://192.168.38.173:8088/questions/${answer.userId}/{countryId}/{questionId}/${answer.id}`;
+    const url = `http://localhost:8080/questions/save/${answer.userId}/${answer.id}`;
     fetch(url, { method: 'POST' })
       .then((resp) => {
         resolve(resp);

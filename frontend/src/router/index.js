@@ -27,9 +27,19 @@ const router = new Router({
       component: () => import('@/pages/test/Test'),
     },
     {
-      name: 'setting',
-      path: '/setting',
-      component: () => import('@/pages/settings/Setting.vue'),
+      name: 'addCountry',
+      path: '/addCountry/:changing?',
+      component: () => import('@/pages/settings/AddCountry'),
+    },
+    {
+      name: 'addQuestion',
+      path: '/addQuestion',
+      component: () => import('@/pages/settings/AddQuestion'),
+    },
+    {
+      name: 'editQuestion',
+      path: '/editQuestion',
+      component: () => import('@/pages/settings/EditQuestion.vue'),
     },
   ],
 });

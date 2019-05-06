@@ -14,6 +14,8 @@ export default {
     country: null,
     questionCountry: null,
     formHasErrors: false,
+    buttonText: 'Добавить',
+    clickFunc: 'addCountry',
   }),
 
   computed: {
@@ -39,7 +41,10 @@ export default {
     },
     addCountry() {
       const { country, img } = this;
-      this.$store.dispatch('country/ADD_COUNTRY', { country, img });
+      console.log(country, img);
+      const { id } = this.savedCountries.filter(value => value.name === country).pop();
+      if (!this.$route.params.changing) this.$store.dispatch('country/ADD_COUNTRY', { country, img });
+      else this.$store.dispatch('country/EDIT_COUNTRY', { id: id, country: country, img: img });
     },
     addQuestion() {
       const self = this;
@@ -61,10 +66,15 @@ export default {
   },
   mounted() {
     const self = this;
-    this.$store.dispatch('country/GET_LIST').then(
+    if (self.$route.params.changing) {
+      self.countries = [];
+      self.buttonText = 'Изменить';
+    }
+    this.$store.dispatch('question/GET_LIST').then(
       (result) => {
         result.json().then(function (data) {
           data.forEach((element) => {
+            if (self.$route.params.changing) self.countries.push(element.name);
             self.savedCountries.push(element);
           });
         });

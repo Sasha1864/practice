@@ -6,14 +6,29 @@ export default {
 
   data: () => ({
     countries: [],
+    items: [
+      { title: 'Click Me1' },
+      { title: 'Click Me2' },
+      { title: 'Click Me3' },
+      { title: 'Click Me4' },
+    ],
   }),
   methods: {
     func: function (country) {
       const countryId = country.id;
       this.$router.push({ name: 'test', params: { id: countryId } });
     },
-    settings: function () {
-      this.$router.push('/setting');
+    addCountry: function () {
+      this.$router.push({ name: 'addCountry' });
+    },
+    addQuestion: function () {
+      this.$router.push({ name: 'addQuestion' });
+    },
+    editCountry: function () {
+      this.$router.push({ name: 'addCountry', params: { changing: true } });
+    },
+    editQuestion: function () {
+      this.$router.push({ name: 'editQuestion' });
     },
   },
   mounted() {

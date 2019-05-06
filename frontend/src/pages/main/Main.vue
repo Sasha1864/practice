@@ -1,4 +1,5 @@
 <template>
+<div>
    <v-menu>
         <template #activator="{ on: menu }">
           <v-tooltip bottom>
@@ -15,11 +16,11 @@
             </template>
             <span>Кликни, чтобы выбрать страну</span>
           </v-tooltip>
-           <v-btn
+           <!-- <v-btn
                 color="primary"
                 dark
                 @click="settings"
-              >Настройки</v-btn>
+              >Настройки</v-btn> -->
         </template>
         <v-list>
           <v-list-tile
@@ -31,6 +32,35 @@
           </v-list-tile>
         </v-list>
       </v-menu>
+      <v-menu>
+        <template #activator="{ on: menu }">
+          <v-tooltip bottom>
+            <template #activator="{ on: tooltip }">
+              <v-btn
+                color="primary"
+                dark
+                v-on="{ ...tooltip, ...menu }"
+              >Настройки</v-btn>
+            </template>
+            <span>Настройки</span>
+          </v-tooltip>
+        </template>
+        <v-list>
+          <v-list-tile @click="addCountry">
+            <v-list-tile-title>Добавление страны</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile  @click="addQuestion">
+            <v-list-tile-title>Добавление вопроса</v-list-tile-title>
+          </v-list-tile>
+           <v-list-tile @click="editCountry">
+            <v-list-tile-title>Изменение страны</v-list-tile-title>
+          </v-list-tile>
+           <v-list-tile @click="editQuestion">
+            <v-list-tile-title>Изменение вопросов</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+</div>
 </template>
 
 <script src="./index.js"></script>

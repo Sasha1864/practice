@@ -6,13 +6,14 @@ import Vue from 'vue';
 import Axios from 'axios';
 
 const localVue = new Vue();
-
+// const baseUrl = '192.168.38.173:8088';
+const baseUrl = '172.16.13.200:9082';
 const getters = {
 };
 
 const actions = {
   GET_LIST: ({ commit, dispatch }) => new Promise((resolve, reject) => {
-    const url = 'http://localhost:8080/countries/list';
+    const url = `http://${baseUrl}/countries/list`;
     fetch(url)
       .then((resp) => {
         resolve(resp);
@@ -23,7 +24,7 @@ const actions = {
       });
   }),
   GET_COUNTRY: ({ commit, dispatch }, countryId) => new Promise((resolve, reject) => {
-    const url = `http://localhost:8080/countries/${countryId}`;
+    const url = `http://${baseUrl}/countries/${countryId}`;
     fetch(url)
       .then((resp) => {
         resolve(resp);
@@ -34,8 +35,19 @@ const actions = {
       });
   }),
   ADD_COUNTRY: ({ commit, dispatch }, country) => new Promise((resolve, reject) => {
-    const url = `http://localhost:8080/countries/add?name=${country.country}&image=${country.img}`;
+    const url = `http://${baseUrl}/countries/add?name=${country.country}&image=${country.img}`;
     fetch(url)
+      .then((resp) => {
+        resolve(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  }),
+  EDIT_COUNTRY: ({ commit, dispatch }, country) => new Promise((resolve, reject) => {
+    const url = `http://${baseUrl}/countries/edit?id=${country.id}&name=${country.country}&image=${country.img}`;
+    fetch(url, { method: 'PUT' })
       .then((resp) => {
         resolve(resp);
       })

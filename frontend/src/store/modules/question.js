@@ -44,6 +44,28 @@ const actions = {// eslint-disable-next-line
         reject(err);
       });
   }),
+  ADD_QUESTION: ({ commit, dispatch }, question) => new Promise((resolve, reject) => {
+    const url = `http://localhost:8080/questions/questions/add?country.id=${question.questionCountry}&question=${question.question}`;
+    fetch(url, { method: 'POST' })
+      .then((resp) => {
+        resolve(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  }),
+  ADD_ANSWER: ({ commit, dispatch }, answer) => new Promise((resolve, reject) => {
+    const url = `http://localhost:8080/questions/answers/add?question.id=${answer.questionId}&answer=${answer.answer}&status=${answer.status}`;
+    fetch(url, { method: 'POST' })
+      .then((resp) => {
+        resolve(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  }),
 };
 
 const mutations = {

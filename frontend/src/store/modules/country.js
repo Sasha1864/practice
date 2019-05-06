@@ -33,6 +33,17 @@ const actions = {
         reject(err);
       });
   }),
+  ADD_COUNTRY: ({ commit, dispatch }, country) => new Promise((resolve, reject) => {
+    const url = `http://localhost:8080/countries/add?name=${country.country}&image=${country.img}`;
+    fetch(url)
+      .then((resp) => {
+        resolve(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  }),
 };
 
 const mutations = {

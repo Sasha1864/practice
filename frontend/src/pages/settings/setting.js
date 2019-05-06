@@ -10,22 +10,13 @@ export default {
     answer: '',
     answers: [],
     trueAnswer: '',
-    zip: null,
+    savedCountries: [],
     country: null,
+    questionCountry: null,
     formHasErrors: false,
   }),
 
   computed: {
-    form() {
-      return {
-        name: this.name,
-        address: this.address,
-        city: this.city,
-        state: this.state,
-        zip: this.zip,
-        country: this.country,
-      };
-    },
   },
 
   watch: {
@@ -46,14 +37,38 @@ export default {
       this.answers.push(this.answer);
       this.answer = '';
     },
-    submit() {
-      this.formHasErrors = false;
-
-      Object.keys(this.form).forEach((f) => {
-        if (!this.form[f]) this.formHasErrors = true;
-
-        this.$refs[f].validate(true);
-      });
+    addCountry() {
+      const { country, img } = this;
+      this.$store.dispatch('country/ADD_COUNTRY', { country, img });
     },
+    addQuestion() {
+      const self = this;
+      const { questionCountry, question } = this;
+      this.$store.dispatch('question/ADD_QUESTION', { questionCountry, question }).then(
+        (result) => {
+          result.json().then(function (questionId) {
+            self.answers.forEach((answer) => {
+              let status = '';
+              if (answer === self.trueAnswer) {
+                status = true;
+              } else status = false;
+              self.$store.dispatch('question/ADD_ANSWER', { questionId, answer, status });
+            });
+          });
+        },
+      );
+    },
+  },
+  mounted() {
+    const self = this;
+    this.$store.dispatch('country/GET_LIST').then(
+      (result) => {
+        result.json().then(function (data) {
+          data.forEach((element) => {
+            self.savedCountries.push(element);
+          });
+        });
+      },
+    );
   },
 };

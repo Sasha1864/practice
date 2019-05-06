@@ -1,5 +1,6 @@
 package org.communis.practice.controller.rest;
 
+import org.communis.practice.dto.AnswerWrapper;
 import org.communis.practice.dto.QuestionWrapper;
 import org.communis.practice.entity.Answer;
 import org.communis.practice.entity.Question;
@@ -29,11 +30,18 @@ public class QuestionRestController {
     }
 
     @PostMapping(value = "questions/add")
-    public void add(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult) throws ServerException {
+    public Long add(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
-        questionService.add(questionWrapper);
+        return questionService.add(questionWrapper);
+    }
+    @PostMapping(value = "answers/add")
+    public void add(@Valid AnswerWrapper answerWrapper, BindingResult bindingResult) throws ServerException {
+        if (bindingResult.hasErrors()) {
+            throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
+        }
+        questionService.addAnswer(answerWrapper);
     }
 
     @PutMapping(value = "/edit")

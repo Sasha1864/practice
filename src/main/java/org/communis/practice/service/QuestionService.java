@@ -1,5 +1,6 @@
 package org.communis.practice.service;
 
+import org.communis.practice.dto.AnswerWrapper;
 import org.communis.practice.dto.CountryWrapper;
 import org.communis.practice.dto.QuestionWrapper;
 import org.communis.practice.dto.UserWrapper;
@@ -44,11 +45,12 @@ public class QuestionService {
         return questionRepository.findById(id);
     }
 
-    public void add(QuestionWrapper questionWrapper) {
+    public Long add(QuestionWrapper questionWrapper) {
         Question question = new Question();
         questionWrapper.fromWrapper(question);
         question.setDateCreate(new Date());
         questionRepository.save(question);
+        return question.getId();
     }
 
     public void edit(QuestionWrapper questionWrapper) throws ServerException {
@@ -101,5 +103,11 @@ public class QuestionService {
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_LIST_ERROR), ex);
         }
+    }
+
+    public void addAnswer(AnswerWrapper answerWrapper) {
+        Answer answer = new Answer();
+        answerWrapper.fromWrapper(answer);
+        answerRepository.save(answer);
     }
 }

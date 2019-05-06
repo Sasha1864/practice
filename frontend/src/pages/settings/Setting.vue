@@ -26,11 +26,22 @@
           </v-card-text>
           <v-divider class="mt-5"></v-divider>
           <v-card-actions>
-            <v-btn color="primary" flat @click="submit">Добавить</v-btn>
+            <v-btn color="primary" flat @click="addCountry">Добавить</v-btn>
           </v-card-actions>
         </v-card>
         <v-card class="card" ref="form">
              <v-card-text>
+               <v-autocomplete
+                ref="questionCountry"
+               v-model = "questionCountry"
+              :rules="[() => !!questionCountry || 'Это поле пустое']"
+              :items="savedCountries"
+              item-text= "name"
+              item-value= "id"
+              label="Страна"
+              placeholder="Выберите страну..."
+              required
+            ></v-autocomplete>
             <v-text-field
               ref="question"
               v-model="question"
@@ -53,19 +64,21 @@
                     @click="addAnswer"
                   >
                     <v-icon>add</v-icon>
-                  </v-btn>
- <v-radio-group v-model="trueAnswer">
-                <v-radio
-                  v-for = "answer in answers"
-                  v-bind:value = "answer"
-                  :key="answer"
-                  :label="`${answer}`"
-                ></v-radio>
+            </v-btn>
+            <p>Выберите правильный ответ</p>
+              <v-radio-group v-model="trueAnswer">
+                  <v-radio
+                    v-for = "answer in answers"
+                    v-bind:value = "answer"
+                    :key="answer"
+                    :label="`${answer}`"
+                  >
+                  </v-radio>
               </v-radio-group>
              </v-card-text>
              <v-divider class="mt-5"></v-divider>
             <v-card-actions>
-            <v-btn color="primary" flat @click="submit">Добавить</v-btn>
+            <v-btn color="primary" flat @click="addQuestion">Добавить</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

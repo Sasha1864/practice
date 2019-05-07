@@ -9,7 +9,6 @@ import store from './store';
 
 
 Vue.config.productionTip = false;
-// Vue.component(VueMaterialIcon.name,)
 
 new Vue({
   router,

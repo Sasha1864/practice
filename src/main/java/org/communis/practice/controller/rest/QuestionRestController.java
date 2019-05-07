@@ -43,6 +43,17 @@ public class QuestionRestController {
         }
         questionService.addAnswer(answerWrapper);
     }
+    @PutMapping(value = "answers/edit")
+    public void edit(@Valid AnswerWrapper answerWrapper, BindingResult bindingResult) throws ServerException {
+        if (bindingResult.hasErrors()) {
+            throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
+        }
+        questionService.editAnswer(answerWrapper);
+    }
+    @DeleteMapping(value = "answers/delete")
+    public void deleteAnswer(Long id) throws ServerException {
+        questionService.deleteAnswer(id);
+    }
 
     @PutMapping(value = "/edit")
     public void edit(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult)

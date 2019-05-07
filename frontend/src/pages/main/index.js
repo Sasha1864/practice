@@ -19,16 +19,19 @@ export default {
       this.$router.push({ name: 'test', params: { id: countryId } });
     },
     addCountry: function () {
-      this.$router.push({ name: 'addCountry' });
+      this.$router.push('/addCountry');
+      // this.$router.go(this.$router.currentRoute);
+      // this.$router.replace('/addCountry');
     },
     addQuestion: function () {
-      this.$router.push({ name: 'addQuestion' });
+      this.$router.push('/addQuestion');
+      // this.$router.replace('/addQuestion');
     },
     editCountry: function () {
       this.$router.push({ name: 'addCountry', params: { changing: true } });
     },
     editQuestion: function () {
-      this.$router.push({ name: 'editQuestion' });
+      this.$router.push('/editQuestion');
     },
   },
   mounted() {

@@ -16,11 +16,6 @@
             </template>
             <span>Кликни, чтобы выбрать страну</span>
           </v-tooltip>
-           <!-- <v-btn
-                color="primary"
-                dark
-                @click="settings"
-              >Настройки</v-btn> -->
         </template>
         <v-list>
           <v-list-tile
@@ -32,7 +27,7 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-      <v-menu>
+      <v-menu class="settings">
         <template #activator="{ on: menu }">
           <v-tooltip bottom>
             <template #activator="{ on: tooltip }">
@@ -64,3 +59,5 @@
 </template>
 
 <script src="./index.js"></script>
+<style scoped>
+</style>

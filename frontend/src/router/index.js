@@ -34,7 +34,7 @@ const router = new Router({
     {
       name: 'addQuestion',
       path: '/addQuestion',
-      component: () => import('@/pages/settings/AddQuestion'),
+      component: () => import('@/pages/settings/AddQuestion.vue'),
     },
     {
       name: 'editQuestion',

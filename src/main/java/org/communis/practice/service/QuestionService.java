@@ -63,6 +63,23 @@ public class QuestionService {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
         }
     }
+    public void editAnswer(AnswerWrapper answerWrapper) throws ServerException {
+        try {
+            Answer answer = answerRepository.findById(answerWrapper.getId());
+            answerWrapper.fromWrapper(answer);
+            answerRepository.save(answer);
+
+        } catch (Exception ex) {
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
+        }
+    }
+    public void deleteAnswer(Long id) throws ServerException {
+        try {
+            answerRepository.delete(id);
+        } catch (Exception ex) {
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
+        }
+    }
 
     public void addUserAnswer(Long userId, Long answerId){
         User user = userRepository.findById(userId);

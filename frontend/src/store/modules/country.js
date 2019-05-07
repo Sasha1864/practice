@@ -6,7 +6,7 @@ import Vue from 'vue';
 import Axios from 'axios';
 
 const localVue = new Vue();
-// const baseUrl = '192.168.38.173:8088';
+// const baseUrl = 'localhost:8080';
 const baseUrl = '172.16.13.200:9082';
 const getters = {
 };

@@ -1,6 +1,4 @@
 <template>
-<div id="app">
-  <v-app id="inspire">
     <v-layout justify-center>
       <v-flex xs12 sm10 md8 lg6>
         <v-card class="card" ref="form">
@@ -53,14 +51,13 @@
              <v-divider class="mt-5"></v-divider>
             <v-card-actions>
             <v-btn color="primary" flat @click="addQuestion">Добавить</v-btn>
+            <v-btn color="primary" flat @click="back">Назад</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
-  </v-app>
-</div>
 </template>
-<script src="./setting.js"></script>
+<script src="./addQuestion.js"></script>
 <style scoped>
 .card{
     margin-top: 20px;

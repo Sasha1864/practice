@@ -6,7 +6,7 @@
           <v-flex xs12 sm8 md4 class="user-form">
             <v-card class="elevation-12">
               <div class="primary white--text text-xs-center">
-                <div class="conf title">Имя проекта</div>
+                <div class="conf title">Авторизация</div>
               </div>
               <v-card-text>
                 <v-form class="login" @submit.prevent="loginm">
@@ -30,7 +30,8 @@
                     type="submit"
                     @click="loginm"
                   >
-                    Вход</v-btn
+                  <v-icon left>input</v-icon>
+                     Вход</v-btn
                   >
                   <v-btn
                     class="button1"
@@ -38,7 +39,7 @@
                     type="submit"
                     @click="register"
                   >
-                    Регистрация</v-btn
+                   <v-icon left>how_to_reg</v-icon> Регистрация</v-btn
                   >
                 </v-form>
                 <p v-if="stat == 'error'" class="err1">

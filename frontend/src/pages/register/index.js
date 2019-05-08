@@ -7,8 +7,6 @@ import store from '../../store';
 
 
 export default {
-  name: 'login',
-
   data() {
     return {
       texterr: '',
@@ -21,6 +19,17 @@ export default {
 
   methods: {
     register: function () {
+      const {
+        name, surname, login, password,
+      } = this;
+      this.$store.dispatch('user/ADD_USER', {
+        name, surname, login, password,
+      }).then(() => {
+        this.$router.push('/login');
+      });
+    },
+    back() {
+      this.$router.push('/login');
     },
   },
   computed: {

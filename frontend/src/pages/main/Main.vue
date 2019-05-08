@@ -1,6 +1,7 @@
 <template>
-<div>
-   <v-menu>
+<div class="settings">
+  <div>
+  <v-menu>
         <template #activator="{ on: menu }">
           <v-tooltip bottom>
             <template #activator="{ on: tooltip }">
@@ -27,7 +28,9 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-      <v-menu class="settings">
+  </div>
+      <div>
+       <v-menu>
         <template #activator="{ on: menu }">
           <v-tooltip bottom>
             <template #activator="{ on: tooltip }">
@@ -55,9 +58,20 @@
           </v-list-tile>
         </v-list>
       </v-menu>
+      </div>
+      <v-btn
+                color="primary"
+                dark
+                icon
+                @click = "logOut"
+              ><v-icon>logout</v-icon></v-btn>
 </div>
 </template>
 
 <script src="./index.js"></script>
 <style scoped>
+
+.settings{
+display: inline-flex;
+}
 </style>

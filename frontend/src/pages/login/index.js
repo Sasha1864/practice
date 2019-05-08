@@ -36,4 +36,8 @@ export default {
       return stat;
     },
   },
+  mounted() {
+    store.state['user/isAuthenticated'] = false;
+    // store.getters['user/isAuthenticated'] = false;
+  },
 };

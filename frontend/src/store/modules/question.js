@@ -6,8 +6,8 @@ import Vue from 'vue';
 import Axios from 'axios';
 
 const localVue = new Vue();
-const baseUrl = '172.16.13.200:9082';
-// const baseUrl = 'localhost:8080';
+// const baseUrl = '172.16.13.200:9082';
+const baseUrl = 'localhost:8080';
 const getters = {
 };
 
@@ -79,6 +79,7 @@ const actions = {// eslint-disable-next-line
       });
   }),
   EDIT_QUESTION: ({ commit, dispatch }, question) => new Promise((resolve, reject) => {
+    console.log(question);
     const url = `http://${baseUrl}/questions/edit?country.id=${question.countryId}&id=${question.id}&question=${question.question}`;
     fetch(url, { method: 'PUT' })
       .then((resp) => {
@@ -91,6 +92,28 @@ const actions = {// eslint-disable-next-line
   }),
   ADD_ANSWER: ({ commit, dispatch }, answer) => new Promise((resolve, reject) => {
     const url = `http://${baseUrl}/questions/answers/add?question.id=${answer.questionId}&answer=${answer.answer}&status=${answer.status}`;
+    fetch(url, { method: 'POST' })
+      .then((resp) => {
+        resolve(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  }),
+  EDIT_ANSWER: ({ commit, dispatch }, answer) => new Promise((resolve, reject) => {
+    const url = `http://${baseUrl}/questions/answers/edit?question.id=${answer.questionId}&id=${answer.id}&answer=${answer.answer}&status=${answer.status}`;
+    fetch(url, { method: 'PUT' })
+      .then((resp) => {
+        resolve(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  }),
+  DELETE_ANSWER: ({ commit, dispatch }, id) => new Promise((resolve, reject) => {
+    const url = `http://${baseUrl}/questions/answers/delete?id=${id}`;
     fetch(url, { method: 'POST' })
       .then((resp) => {
         resolve(resp);

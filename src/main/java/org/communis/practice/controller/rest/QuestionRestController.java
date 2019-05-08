@@ -37,11 +37,11 @@ public class QuestionRestController {
         return questionService.add(questionWrapper);
     }
     @PostMapping(value = "answers/add")
-    public void add(@Valid AnswerWrapper answerWrapper, BindingResult bindingResult) throws ServerException {
+    public Long addAnswer(@Valid AnswerWrapper answerWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
-        questionService.addAnswer(answerWrapper);
+        return questionService.addAnswer(answerWrapper);
     }
     @PutMapping(value = "answers/edit")
     public void edit(@Valid AnswerWrapper answerWrapper, BindingResult bindingResult) throws ServerException {
@@ -50,7 +50,7 @@ public class QuestionRestController {
         }
         questionService.editAnswer(answerWrapper);
     }
-    @DeleteMapping(value = "answers/delete")
+    @PostMapping(value = "answers/delete")
     public void deleteAnswer(Long id) throws ServerException {
         questionService.deleteAnswer(id);
     }
@@ -82,6 +82,12 @@ public class QuestionRestController {
     @GetMapping(value = "country/{countryId}")
     public List<Question> getQuestionsByCountryId(@PathVariable Long countryId) throws ServerException {
         return questionService.getQuestionsByCountryId(countryId);
+    }
+    @GetMapping(value = "answers/userAnswers/")
+    public List<UserAnswer> getUserAnswersByAnswer(Long answerId) throws ServerException {
+        // Answer answer = new Answer();
+        // answerWrapper.fromWrapper(answer);
+        return questionService.findAllUserAnswersByAnswer(answerId);
     }
 
     @GetMapping(value = "answers/{questionId}")

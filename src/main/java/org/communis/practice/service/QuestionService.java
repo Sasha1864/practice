@@ -16,6 +16,7 @@ import org.communis.practice.repository.UserAnswerRepository;
 import org.communis.practice.repository.UserRepository;
 import org.communis.practice.repository.specifications.AnswerSpecification;
 import org.communis.practice.repository.specifications.QuestionSpecification;
+import org.communis.practice.repository.specifications.UserAnswerSpecification;
 import org.communis.practice.repository.specifications.UserSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,6 +44,16 @@ public class QuestionService {
 
     public Question getById(Long id) {
         return questionRepository.findById(id);
+    }
+
+    public List<UserAnswer> findAllUserAnswersByAnswer(Long answerId) throws ServerException {
+        try {
+            UserAnswerSpecification spec = new UserAnswerSpecification(answerId);
+            List<UserAnswer> result = userAnswerRepository.findAll(spec);
+            return result;
+        } catch (Exception ex) {
+            throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_LIST_ERROR), ex);
+        }
     }
 
     public Long add(QuestionWrapper questionWrapper) {
@@ -75,6 +86,7 @@ public class QuestionService {
     }
     public void deleteAnswer(Long id) throws ServerException {
         try {
+            userAnswerRepository.delete(findAllUserAnswersByAnswer(id));
             answerRepository.delete(id);
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
@@ -122,9 +134,10 @@ public class QuestionService {
         }
     }
 
-    public void addAnswer(AnswerWrapper answerWrapper) {
+    public Long addAnswer(AnswerWrapper answerWrapper) {
         Answer answer = new Answer();
         answerWrapper.fromWrapper(answer);
         answerRepository.save(answer);
+        return answer.getId();
     }
 }

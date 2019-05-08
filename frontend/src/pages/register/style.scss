@@ -6,11 +6,15 @@
   
   .button1 {
     width: 100px;
-    margin-left: 0 !important;
   }
-  
+  .button2{
+    width: 100px;
+  }
+  .container{
+    display: inline-flex;
+  }
   .v-card__actions {
-    margin-left: 17px;
+   
   }
   
   .v-card__text {
@@ -27,7 +31,8 @@
     justify-content: center !important;
     text-align: center !important;
     align-items: center !important;
-    padding-bottom: 24px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     text-transform: uppercase;
   }
   

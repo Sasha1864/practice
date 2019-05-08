@@ -27,6 +27,10 @@ export default {
       this.$router.push('/addQuestion');
       // this.$router.replace('/addQuestion');
     },
+    logOut: function () {
+      this.$store.dispatch('user/AUTH_LOGOUT');
+      this.$router.push('/login');
+    },
     editCountry: function () {
       this.$router.push({ name: 'addCountry', params: { changing: true } });
     },

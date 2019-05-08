@@ -5,8 +5,9 @@
 }
 
 .button1 {
-  width: 100px;
-  margin-left: 0 !important;
+  width: 150px;
+  height: 40px;
+   margin: 10px auto;
 }
 
 .v-card__actions {
@@ -27,7 +28,8 @@
   justify-content: center !important;
   text-align: center !important;
   align-items: center !important;
-  padding-bottom: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-transform: uppercase;
 }
 

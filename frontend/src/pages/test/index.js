@@ -18,8 +18,10 @@ export default {
       });
       this.numberOfTrueAnswers = this.selectedAnswers.filter(value => value.status === true).length;
     },
+    back() {
+      this.$router.push('/ok');
+    },
   },
-
   mounted() {
     const self = this;
     this.$store.dispatch('country/GET_COUNTRY', this.countryId).then(

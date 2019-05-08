@@ -79,7 +79,7 @@ public class QuestionRestController {
         return questionService.findAllUserAnswers();
     }
 
-    @GetMapping(value = "country/{countryId}")
+    @GetMapping("country/{countryId}")
     public List<Question> getQuestionsByCountryId(@PathVariable Long countryId) throws ServerException {
         return questionService.getQuestionsByCountryId(countryId);
     }

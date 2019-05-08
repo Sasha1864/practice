@@ -17,13 +17,21 @@
               </v-radio-group>
       </div>
       <h2>Количество правильных ответов: {{numberOfTrueAnswers}}</h2>
-      <v-btn
+      <div class = "buttons"></div><v-btn
                     class="button1"
                     color="primary"
                     type="submit"
                     @click="saveAnswer"
                   >
                     OK</v-btn
+                  >
+                   <v-btn
+                    class="button1"
+                    color="primary"
+                    type="submit"
+                    @click="saveAnswer"
+                  >
+                    Назад</v-btn
                   >
     </v-container>
   </v-app>
@@ -40,5 +48,8 @@ img{
 }
 .button1{
     margin-left: 50%;
+}
+.buttons{
+  display:inline-flex;
 }
 </style>

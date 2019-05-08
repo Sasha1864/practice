@@ -1,5 +1,6 @@
 package org.communis.practice.service;
 
+import lombok.RequiredArgsConstructor;
 import org.communis.practice.dto.AnswerWrapper;
 import org.communis.practice.dto.CountryWrapper;
 import org.communis.practice.dto.QuestionWrapper;
@@ -26,21 +27,16 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class QuestionService {
 
-    private QuestionRepository questionRepository;
-    private UserAnswerRepository userAnswerRepository;
-    private UserRepository userRepository;
-    private AnswerRepository answerRepository;
+    private final  QuestionRepository questionRepository;
+    private final UserAnswerRepository userAnswerRepository;
+    private final UserRepository userRepository;
+    private final AnswerRepository answerRepository;
 
-    @Autowired
-    public QuestionService(QuestionRepository questionRepository, UserAnswerRepository userAnswerRepository, UserRepository userRepository, AnswerRepository answerRepository) {
-        this.questionRepository = questionRepository;
-        this.userAnswerRepository = userAnswerRepository;
-        this.userRepository = userRepository;
-        this.answerRepository = answerRepository;
-    }
+
 
     public Question getById(Long id) {
         return questionRepository.findById(id);
@@ -69,7 +65,6 @@ public class QuestionService {
             Question question = getById(questionWrapper.getId());
             questionWrapper.fromWrapper(question);
             questionRepository.save(question);
-
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
         }
@@ -79,7 +74,6 @@ public class QuestionService {
             Answer answer = answerRepository.findById(answerWrapper.getId());
             answerWrapper.fromWrapper(answer);
             answerRepository.save(answer);
-
         } catch (Exception ex) {
             throw new ServerException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_UPDATE_ERROR), ex);
         }

@@ -47,7 +47,6 @@ const router = new Router({
 export default router;
 
 router.beforeEach((to, from, next) => {
-  console.log(store.getters['user/isAuthenticated']);
   if (!store.getters['user/isAuthenticated'] && to.path !== '/login' && to.path !== '/register') {
     next('/login');
   } else {

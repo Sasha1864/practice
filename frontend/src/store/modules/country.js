@@ -6,8 +6,8 @@ import Vue from 'vue';
 import Axios from 'axios';
 
 const localVue = new Vue();
-const baseUrl = 'localhost:8080';
-// const baseUrl = '172.16.13.200:9082';
+// const baseUrl = 'localhost:8080';
+const baseUrl = '172.16.13.200:9082';
 const getters = {
 };
 
@@ -36,7 +36,7 @@ const actions = {
   }),
   ADD_COUNTRY: ({ commit, dispatch }, country) => new Promise((resolve, reject) => {
     const url = `http://${baseUrl}/countries/add?name=${country.country}&image=${country.img}`;
-    fetch(url)
+    fetch(url, { method: 'POST' })
       .then((resp) => {
         resolve(resp);
       })

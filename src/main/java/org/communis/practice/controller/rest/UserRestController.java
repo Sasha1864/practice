@@ -9,10 +9,7 @@ import org.communis.practice.exception.error.ErrorInformationBuilder;
 import org.communis.practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,7 +26,7 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/add")
+    @PostMapping("/add")
     public void add(@Valid UserWrapper userWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
@@ -37,7 +34,7 @@ public class UserRestController {
         userService.add(userWrapper);
     }
 
-    @RequestMapping(value = "/edit")
+    @PutMapping("/edit")
     public void edit(@Valid UserWrapper userWrapper, BindingResult bindingResult)
             throws ServerException {
         if (bindingResult.hasErrors()) {
@@ -46,12 +43,12 @@ public class UserRestController {
         userService.edit(userWrapper);
     }
 
-    @RequestMapping(value = "/list")
+    @GetMapping("/list")
     public List<User> findAll(){
         return userService.findAll();
     }
 
-    @GetMapping(value = "{id}")
+    @GetMapping("{id}")
     public User getById(@PathVariable Long id){
         return userService.getById(id);
     }

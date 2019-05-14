@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "questions")
+@RequestMapping("questions")
 public class QuestionRestController {
 
     @Autowired
@@ -29,33 +29,33 @@ public class QuestionRestController {
         this.questionService = questionService;
     }
 
-    @PostMapping(value = "questions/add")
+    @PostMapping("questions/add")
     public Long add(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
         return questionService.add(questionWrapper);
     }
-    @PostMapping(value = "answers/add")
+    @PostMapping("answers/add")
     public Long addAnswer(@Valid AnswerWrapper answerWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
         return questionService.addAnswer(answerWrapper);
     }
-    @PutMapping(value = "answers/edit")
+    @PutMapping("answers/edit")
     public void edit(@Valid AnswerWrapper answerWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
         }
         questionService.editAnswer(answerWrapper);
     }
-    @PostMapping(value = "answers/delete")
+    @PostMapping("answers/delete")
     public void deleteAnswer(Long id) throws ServerException {
         questionService.deleteAnswer(id);
     }
 
-    @PutMapping(value = "/edit")
+    @PutMapping("/edit")
     public void edit(@Valid QuestionWrapper questionWrapper, BindingResult bindingResult)
             throws ServerException {
         if (bindingResult.hasErrors()) {
@@ -64,17 +64,17 @@ public class QuestionRestController {
         questionService.edit(questionWrapper);
     }
 
-    @GetMapping(value = "{id}")
+    @GetMapping("{id}")
     public Question getById(@PathVariable Long id){
         return questionService.getById(id);
     }
 
-    @GetMapping(value = "")
+    @GetMapping("")
     public List<Question> findAllQuestions(){
         return questionService.findAllQuestions();
     }
 
-    @GetMapping(value = "userAnswers")
+    @GetMapping("userAnswers")
     public List<UserAnswer> findAllUserAnswers(){
         return questionService.findAllUserAnswers();
     }
@@ -83,20 +83,18 @@ public class QuestionRestController {
     public List<Question> getQuestionsByCountryId(@PathVariable Long countryId) throws ServerException {
         return questionService.getQuestionsByCountryId(countryId);
     }
-    @GetMapping(value = "answers/userAnswers/")
+    @GetMapping("answers/userAnswers/")
     public List<UserAnswer> getUserAnswersByAnswer(Long answerId) throws ServerException {
-        // Answer answer = new Answer();
-        // answerWrapper.fromWrapper(answer);
         return questionService.findAllUserAnswersByAnswer(answerId);
     }
 
-    @GetMapping(value = "answers/{questionId}")
+    @GetMapping("answers/{questionId}")
     public List<Answer> getAnswersByQuestionId(@PathVariable Long questionId) throws ServerException {
         List<Answer> answers = questionService.getAnswersByQuestionId(questionId);
         return answers;
     }
 
-    @PostMapping(value = "save/{userId}/{answerId}")
+    @PostMapping("save/{userId}/{answerId}")
     public void addUserAnswer(@PathVariable Long userId, @PathVariable Long answerId) {
         questionService.addUserAnswer(userId, answerId);
     }

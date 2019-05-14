@@ -5,8 +5,8 @@
 import Vue from 'vue';
 
 const localVue = new Vue();
-// const baseUrl = '172.16.13.200:9082';
-const baseUrl = 'localhost:8080';
+const baseUrl = '172.16.13.200:9082';
+// const baseUrl = 'localhost:8080';
 
 const state = {
   token: localStorage.getItem('user-token') || '',

@@ -17,13 +17,14 @@
           >
             <v-card class="elevation-12">
               <div class="primary white--text text-xs-center">
-                <div class="conf title">Регистрация</div>
+                <div class="conf">Регистрация</div>
               </div>
               <v-card-text>
                 <v-form
                   class="login"
                 >
                   <v-text-field
+                  prepend-icon="person"
                     name="login"
                     label="Логин"
                     type="text"
@@ -31,6 +32,7 @@
                     autofocus
                   ></v-text-field>
                   <v-text-field
+                   prepend-icon="edit"
                     name="Name"
                     label="Имя"
                     type="text"
@@ -38,6 +40,7 @@
                     autofocus
                   ></v-text-field>
                   <v-text-field
+                  prepend-icon="edit"
                     name="Surname"
                     label="Фамилия"
                     type="text"
@@ -45,28 +48,28 @@
                     autofocus
                   ></v-text-field>
                   <v-text-field
+                  prepend-icon="lock"
                     id="password"
                     name="password"
                     label="Пароль"
                     type="password"
                     v-model="password"
                   ></v-text-field>
-                  <div class="container">
-                    <v-btn
+                    <!-- <v-btn
                     class="button2"
                     color="primary"
                     type="submit"
                     @click="back"
                   > Назад<v-icon right>reply</v-icon>
-                    </v-btn>
+                    </v-btn> -->
                     <v-btn
                     class="button1"
                     color="primary"
                     type="submit"
                     @click="register"
                   >
-                    OK<v-icon right>done</v-icon></v-btn>
-                    </div>
+                    OK</v-btn>
+                     <p class="message"> <a @click="back">Вернуться к авторизации</a></p>
                 </v-form>
                 <p
                   v-if="stat == 'error'"

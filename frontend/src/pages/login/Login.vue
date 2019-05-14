@@ -6,11 +6,12 @@
           <v-flex xs12 sm8 md4 class="user-form">
             <v-card class="elevation-12">
               <div class="primary white--text text-xs-center">
-                <div class="conf title">Авторизация</div>
+                 <div class="conf">Авторизация</div>
               </div>
               <v-card-text>
                 <v-form class="login" @submit.prevent="loginm">
                   <v-text-field
+                  prepend-icon="person"
                     name="login"
                     label="Логин"
                     type="text"
@@ -18,6 +19,7 @@
                     autofocus
                   ></v-text-field>
                   <v-text-field
+                  prepend-icon="lock"
                     id="password"
                     name="password"
                     label="Пароль"
@@ -25,22 +27,22 @@
                     v-model="password"
                   ></v-text-field>
                   <v-btn
-                    class="button1"
+                  class="button1"
                     color="primary"
                     type="submit"
                     @click="loginm"
                   >
-                  <v-icon left>input</v-icon>
                      Вход</v-btn
                   >
-                  <v-btn
-                    class="button1"
+                  <!-- <v-btn
+                    class="button2"
                     color="primary"
                     type="submit"
                     @click="register"
                   >
-                   <v-icon left>how_to_reg</v-icon> Регистрация</v-btn
-                  >
+                    Регистрация</v-btn
+                  > -->
+                  <p class="message">Вы не зарегистрированы? <a @click="register">Создайте аккаунт</a></p>
                 </v-form>
                 <p v-if="stat == 'error'" class="err1">
                   <!-- Неверный логин или пароль -->
@@ -54,4 +56,5 @@
   </v-app>
 </template>
 <script src="./index.js"></script>
-<style lang="scss" src="./style.scss" scoped></style>
+<style lang="scss" src="./style.scss">
+</style>

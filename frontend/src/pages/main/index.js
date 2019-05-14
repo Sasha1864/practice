@@ -1,4 +1,8 @@
+import Vue from 'vue';
+import Vuetify from 'vuetify';
 import store from '../../store';
+
+Vue.use(Vuetify);
 
 
 export default {
@@ -19,7 +23,7 @@ export default {
       this.$router.push({ name: 'test', params: { id: countryId } });
     },
     addCountry: function () {
-      this.$router.push('/addCountry');
+      this.$router.push({ name: 'addCountry', params: { changing: false } });
       // this.$router.go(this.$router.currentRoute);
       // this.$router.replace('/addCountry');
     },

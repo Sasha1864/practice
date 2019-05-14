@@ -48,9 +48,13 @@ export default {
     },
     addCountry() {
       const { country, img } = this;
-      const { id } = this.savedCountries.filter(value => value.name === country).pop();
-      if (!this.$route.params.changing) this.$store.dispatch('country/ADD_COUNTRY', { country, img });
-      else this.$store.dispatch('country/EDIT_COUNTRY', { id: id, country: country, img: img });
+      console.log(this.$route.params.changing);
+      if (!this.$route.params.changing) {
+        this.$store.dispatch('country/ADD_COUNTRY', { country, img });
+      } else {
+        const { id } = this.savedCountries.filter(value => value.name === country).pop();
+        this.$store.dispatch('country/EDIT_COUNTRY', { id: id, country: country, img: img });
+      }
     },
   },
   mounted() {

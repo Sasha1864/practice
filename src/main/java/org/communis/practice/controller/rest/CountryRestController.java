@@ -9,16 +9,13 @@ import org.communis.practice.exception.error.ErrorInformationBuilder;
 import org.communis.practice.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "countries")
+@RequestMapping("countries")
 public class CountryRestController {
     @Autowired
     private final CountryService countryService;
@@ -28,7 +25,7 @@ public class CountryRestController {
         this.countryService = countryService;
     }
 
-    @RequestMapping(value = "/add")
+    @PostMapping("/add")
     public void add(@Valid CountryWrapper countryWrapper, BindingResult bindingResult) throws ServerException {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(ErrorInformationBuilder.build(ErrorCodeConstants.DATA_VALIDATE_ERROR));
@@ -36,7 +33,7 @@ public class CountryRestController {
         countryService.add(countryWrapper);
     }
 
-    @RequestMapping(value = "/edit")
+    @PutMapping("/edit")
     public void edit(@Valid CountryWrapper countryWrapper, BindingResult bindingResult)
             throws ServerException {
         if (bindingResult.hasErrors()) {
@@ -45,12 +42,12 @@ public class CountryRestController {
         countryService.edit(countryWrapper);
     }
 
-    @GetMapping(value = "{id}")
+    @GetMapping("{id}")
     public Country getById(@PathVariable Long id){
         return countryService.getById(id);
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping("/list")
     public List<Country> findAll(){
         return countryService.findAll();
     }
